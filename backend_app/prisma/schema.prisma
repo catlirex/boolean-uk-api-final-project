@@ -2,10 +2,86 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialActions"]
+}
+
+model User {
+  id           Int    @id @default(autoincrement())
+  name         String
+  phone_number Int    @unique
+
+  transaction Transaction[]
+}
+
+model Shop {
+  id       Int    @id @default(autoincrement())
+  name     String
+  postcode String @unique
+  image    String
+
+  transaction Transaction[]
+}
+
+model Coffee {
+  id          Int     @id @default(autoincrement())
+  name        String
+  size        String
+  price       Int
+  description String
+  ice         Boolean
+  image       String
+
+  coffee_order Coffee_order[]
+}
+
+model Special_request {
+  id      Int    @id @default(autoincrement())
+  request String
+  price   Int
+  type    String
+
+  coffee_order Coffee_order[]
+}
+
+model Coffee_order {
+  id       Int @id @default(autoincrement())
+  quantity Int
+
+  transaction_id Int
+  transction     Transaction @relation(fields: [transaction_id], references: [id], onDelete: Cascade)
+
+  coffee_id Int
+  coffee    Coffee @relation(fields: [coffee_id], references: [id], onDelete: Cascade)
+
+  special_request Special_request[]
+}
+
+enum Status {
+  pending
+  procressing
+  ready
+  collected
+}
+
+model Transaction {
+  id                    Int      @id @default(autoincrement())
+  status                Status   @default(pending)
+  // Might give an error
+  transaction_time      DateTime @default(now())
+  estimated_pickup_time DateTime
+
+  user_id Int
+  user    User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  shop_id Int
+  shop    Shop @relation(fields: [shop_id], references: [id], onDelete: Cascade)
+
+  coffeeOrder Coffee_order[]
 }
