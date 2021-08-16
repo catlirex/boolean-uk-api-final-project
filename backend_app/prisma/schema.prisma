@@ -33,7 +33,7 @@ model Coffee {
   id          Int     @id @default(autoincrement())
   name        String
   size        String
-  price       Int
+  price       Float
   description String
   ice         Boolean
   image       String
@@ -44,7 +44,7 @@ model Coffee {
 model Special_request {
   id      Int    @id @default(autoincrement())
   request String
-  price   Int
+  price   Float
   type    String
 
   coffee_order Coffee_order[]
