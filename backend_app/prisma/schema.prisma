@@ -55,7 +55,7 @@ model CoffeeOrder {
   quantity Int
 
   transaction_id Int
-  transction     Transaction @relation(fields: [transaction_id], references: [id], onDelete: Cascade)
+  transaction    Transaction @relation(fields: [transaction_id], references: [id], onDelete: Cascade)
 
   coffee_id Int
   coffee    Coffee @relation(fields: [coffee_id], references: [id], onDelete: Cascade)

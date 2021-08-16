@@ -10,6 +10,7 @@ const app = express();
 const coffeeRouter = require("./src/resources/coffee/router");
 const specialRequestsRouter = require("./src/resources/specialRequests/router");
 const shopRouter = require("./src/resources/shops/router");
+const coffeeOrdersRouter = require("./src/resources/coffeeOrders/router");
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -19,9 +20,10 @@ app.use(express.json());
 app.use("/coffee", coffeeRouter);
 app.use("/specialRequests", specialRequestsRouter);
 app.use("/shops", shopRouter);
+app.use("/orders", coffeeOrdersRouter);
 
 app.all("*", (req, res) => {
-  res.json({ msg: "ok!" });
+  res.status(400).json({ ERROR: "route no set, please check" });
 });
 
 module.exports = app;
