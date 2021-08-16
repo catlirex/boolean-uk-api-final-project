@@ -2,19 +2,31 @@ const { coffeeOrder } = require("../../utils/database");
 
 async function getOneOrder(req, res) {
   const id = Number(req.params.id);
-  const result = await coffeeOrder.findUnique({
-    where: { id },
-    include: { coffee: true },
-  });
-  if (result) res.json(result);
-  if (!result) res.json({ msg: "Item not found" });
+  try {
+    const result = await coffeeOrder.findUnique({
+      where: { id },
+      include: { coffee: true },
+    });
+    if (result) res.json(result);
+    if (!result) res.json({ msg: "Item not found" });
+  } catch (e) {
+    console.log(e);
+    res.json(e.message);
+  }
 }
 
 async function getOrdersOfTransaction(req, res) {
   const id = Number(req.params.id);
-  const result = await coffeeOrder.findMany({ where: { transction: { id } } });
-  if (result) res.json(result);
-  if (!result) res.json({ msg: "Item not found" });
+  try {
+    const result = await coffeeOrder.findMany({
+      where: { transction: { id } },
+    });
+    if (result) res.json(result);
+    if (!result) res.json({ msg: "Item not found" });
+  } catch (e) {
+    console.log(e);
+    res.json(e.message);
+  }
 }
 
 async function postOneCoffeeOrder(req, res) {
