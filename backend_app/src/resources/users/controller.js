@@ -27,14 +27,18 @@ const getUserById = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const newUser = req.body;
-
+  const { name, phone_number } = req.body;
+  
   try {
-    const createdUser = await user.create({
-      data: newUser,
-    });
+    if (name && typeof phone_number === "number") {
+      const createdUser = await user.create({
+        data: { name, phone_number },
+      });
 
-    res.json(createdUser);
+      res.json(createdUser);
+    } else {
+      res.json({ Error: "Info. not correct" });
+    }
   } catch (error) {
     res.json({ error: error.message });
   }
