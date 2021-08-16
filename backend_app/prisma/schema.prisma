@@ -17,7 +17,7 @@ model User {
   name         String
   phone_number Int    @unique
 
-  transaction Transaction[]
+  transactions Transaction[]
 }
 
 model Shop {
@@ -26,7 +26,7 @@ model Shop {
   postcode String @unique
   image    String
 
-  transaction Transaction[]
+  transactions Transaction[]
 }
 
 model Coffee {
@@ -38,19 +38,19 @@ model Coffee {
   ice         Boolean
   image       String
 
-  coffee_order Coffee_order[]
+  coffee_orders CoffeeOrder[]
 }
 
-model Special_request {
+model SpecialRequest {
   id      Int    @id @default(autoincrement())
   request String
   price   Float
   type    String
 
-  coffee_order Coffee_order[]
+  coffee_orders CoffeeOrder[]
 }
 
-model Coffee_order {
+model CoffeeOrder {
   id       Int @id @default(autoincrement())
   quantity Int
 
@@ -60,7 +60,7 @@ model Coffee_order {
   coffee_id Int
   coffee    Coffee @relation(fields: [coffee_id], references: [id], onDelete: Cascade)
 
-  special_request Special_request[]
+  special_requests SpecialRequest[]
 }
 
 enum Status {
@@ -83,5 +83,5 @@ model Transaction {
   shop_id Int
   shop    Shop @relation(fields: [shop_id], references: [id], onDelete: Cascade)
 
-  coffeeOrder Coffee_order[]
+  coffeeOrder CoffeeOrder[]
 }

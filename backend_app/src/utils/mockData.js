@@ -171,293 +171,292 @@ const coffeeList = [
       "https://www.jura.com/-/media/global/images/coffee-recipes/images-redesign-2020/flat_white_2000x1400px.jpg?la=en&hash=09CF109E21F5979B07505D0BF4CC8DA8D0511941",
     ice: false,
   },
-  //   {
-  //     name: "Flat White",
-  //     description:
-  //       "A delicious combination of Espresso and velvety milk, signed off with a perfect florette.",
-  //     size: "Regular",
-  //     price: 2,
-  //     image:
-  //       "https://www.jura.com/-/media/global/images/coffee-recipes/images-redesign-2020/flat_white_2000x1400px.jpg?la=en&hash=09CF109E21F5979B07505D0BF4CC8DA8D0511941",
-  //     ice: false,
-  //   },
-  //   {
-  //     name: "Lungo",
-  //     description:
-  //       "Less strong, but more bitter, than an espresso, because the additional hot water passing through the ground coffee extracts",
-  //     size: "Regular",
-  //     price: 1.5,
-  //     image:
-  //       "https://coffeemaker.top/wp-content/uploads/2021/04/What-is-lungo-coffee.jpg",
-  //     ice: false,
-  //   },
-  //   {
-  //     name: "Macchiato",
-  //     description:
-  //       "Freshly steamed milk with vanilla-flavoured syrup, marked with espresso and finished with caramel sauce.",
-  //     size: "Large",
-  //     price: 4,
-  //     image:
-  //       "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/macchiato-1583406296.jpg",
-  //     ice: false,
-  //   },
-  //   {
-  //     name: "Macchiato",
-  //     description:
-  //       "Freshly steamed milk with vanilla-flavoured syrup, marked with espresso and finished with caramel sauce.",
-  //     size: "Regular",
-  //     price: 2,
-  //     image:
-  //       "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/macchiato-1583406296.jpg",
-  //     ice: false,
-  //   },
-  //   {
-  //     name: "Expresso Romano",
-  //     description:
-  //       "Short or long shot of espresso mixed with a teaspoon of sugar and served with a small piece of lemon rind",
-  //     size: "Regular",
-  //     price: 1.5,
-  //     image:
-  //       "https://static.wixstatic.com/media/86a32b_7af8d7de3d294319a43964c205510801~mv2.png/v1/fill/w_441,h_477,al_c/86a32b_7af8d7de3d294319a43964c205510801~mv2.png",
-  //     ice: false,
-  //   },
-  //   {
-  //     name: "Espresso Con Panna",
-  //     description:
-  //       "A shot of espresso with a generous dollop of whipped cream on top.",
-  //     size: "Regular",
-  //     price: 3.5,
-  //     image:
-  //       "https://www.nicepng.com/png/detail/59-591392_fireplace-solutions-cioccolata-con-panna.png",
-  //     ice: false,
-  //   },
-  //   {
-  //     name: "Morochino",
-  //     description:
-  //       "Served in a small glass and consists of a shot of espresso, cocoa powder and milk froth.",
-  //     size: "Regular",
-  //     price: 4,
-  //     image:
-  //       "https://laboratorioespresso.it/wp-content/uploads/2018/05/caffe-marocchino-710x448-1.jpg",
-  //     ice: false,
-  //   },
-  //   {
-  //     name: "Bicerin",
-  //     description:
-  //       "It is a traditional warm coffee concoction native to Turin, Italy, made of espresso, drinking chocolate and whole milk served layered in a small rounded glass.",
-  //     size: "Large",
-  //     price: 4.5,
-  //     image:
-  //       "https://lh3.googleusercontent.com/proxy/Qu_KtPXL0n67a1cxMN1ZUIukX6WEvx6Z0An7v-d-Fg85MywYfN9OYNthprmvmhSIRDAid7xH68BHsbbnLcTb5CGETlSqAmqeJrEoVScz3U_qcPEk50FE3xWVcbANHBZOYXoLFbkk2ITwuw",
-  //     ice: false,
-  //   },
-  //   {
-  //     name: "Bicerin",
-  //     description:
-  //       "It is a traditional warm coffee concoction native to Turin, Italy, made of espresso, drinking chocolate and whole milk served layered in a small rounded glass.",
-  //     size: "Regular",
-  //     price: 3.5,
-  //     image:
-  //       "https://lh3.googleusercontent.com/proxy/Qu_KtPXL0n67a1cxMN1ZUIukX6WEvx6Z0An7v-d-Fg85MywYfN9OYNthprmvmhSIRDAid7xH68BHsbbnLcTb5CGETlSqAmqeJrEoVScz3U_qcPEk50FE3xWVcbANHBZOYXoLFbkk2ITwuw",
-  //     ice: false,
-  //   },
-  //   {
-  //     name: "Galao",
-  //     description:
-  //       "Coffee with milk served in a tall glass with a shot of espresso and filled with steamed milk.",
-  //     size: "Large",
-  //     price: 5,
-  //     image:
-  //       "https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-Latte-Macchiato.jpg",
-  //     ice: false,
-  //   },
-  //   ,
-  //   {
-  //     name: "Galao",
-  //     description:
-  //       "Coffee with milk served in a tall glass with a shot of espresso and filled with steamed milk.",
-  //     size: "Regular",
-  //     price: 4,
-  //     image:
-  //       "https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-Latte-Macchiato.jpg",
-  //     ice: false,
-  //   },
-  //   {
-  //     name: "Ristretto",
-  //     description:
-  //       "Short shot (30 ml from a double basket) of a more highly concentrated espresso coffee.",
-  //     size: "Regular",
-  //     price: 3,
-  //     image:
-  //       "https://www.jura.com/-/media/global/images/coffee-recipes/images-redesign-2020/ristretto_2000x1400px.jpg?la=en&hash=E708695CD6B3D7F11F676E21FF7577141E8CBE20",
-  //     ice: false,
-  //   },
-  //   {
-  //     name: "Mocha",
-  //     description:
-  //       "Expertly steamed chocolate milk blended with espresso for a caffeinated chocolate treat.",
-  //     size: "Large",
-  //     price: 6,
-  //     image:
-  //       "https://whisk-res.cloudinary.com/image/upload/v1621831977/recipe/e078c3c5603422b78538a94dfa884e34.jpg",
-  //     ice: false,
-  //   },
-  //   {
-  //     name: "Mocha",
-  //     description:
-  //       "Expertly steamed chocolate milk blended with espresso for a caffeinated chocolate treat.",
-  //     size: "Regular",
-  //     price: 3,
-  //     image:
-  //       "https://whisk-res.cloudinary.com/image/upload/v1621831977/recipe/e078c3c5603422b78538a94dfa884e34.jpg",
-  //     ice: false,
-  //   },
-  //   {
-  //     name: "Iced Latte",
-  //     description: "Chilled milk over ice, capped with freshly shaken espresso.",
-  //     size: "Large",
-  //     price: 4,
-  //     image:
-  //       "https://en.cocktail.fabbri1905.com/imgpub/1917906/0/0/iced-latte-400x400.jpg",
-  //     ice: true,
-  //   },
-  //   {
-  //     name: "Iced Latte",
-  //     description: "Chilled milk over ice, capped with freshly shaken espresso.",
-  //     size: "Regular",
-  //     price: 3,
-  //     image:
-  //       "https://en.cocktail.fabbri1905.com/imgpub/1917906/0/0/iced-latte-400x400.jpg",
-  //     ice: true,
-  //   },
-  //   {
-  //     name: "Iced Cappucino",
-  //     description:
-  //       "A bold and balanced coffee, made with freshly shaken espresso and topped with whipped milk foam.",
-  //     size: "Regular",
-  //     price: 3,
-  //     image:
-  //       "https://media1.popsugar-assets.com/files/thumbor/cLu_93KWp9DUyyiiv08KlXOorac/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2021/04/29/539/n/42718227/eda9f6eb960c1f39_Iced_Cappuccino/i/Iced-Cappuccino.jpg",
-  //     ice: true,
-  //   },
-  //   {
-  //     name: "Iced Cappucino",
-  //     description:
-  //       "A bold and balanced coffee, made with freshly shaken espresso and topped with whipped milk foam.",
-  //     size: "Large",
-  //     price: 4,
-  //     image:
-  //       "https://media1.popsugar-assets.com/files/thumbor/cLu_93KWp9DUyyiiv08KlXOorac/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2021/04/29/539/n/42718227/eda9f6eb960c1f39_Iced_Cappuccino/i/Iced-Cappuccino.jpg",
-  //     ice: true,
-  //   },
-  //   {
-  //     name: "Glace",
-  //     description: "Coffee with ice-cream",
-  //     size: "Regular",
-  //     price: 6,
-  //     image:
-  //       "https://img.freepik.com/free-photo/chocolate-coffee-glace-glass-concrete-surface-decorated-with-beans-cinnamon_219193-4558.jpg?size=626&ext=jpg",
-  //     ice: true,
-  //   },
-  //   {
-  //     name: "Glace",
-  //     description: "Coffee with ice-cream",
-  //     size: "Large",
-  //     price: 7,
-  //     image:
-  //       "https://img.freepik.com/free-photo/chocolate-coffee-glace-glass-concrete-surface-decorated-with-beans-cinnamon_219193-4558.jpg?size=626&ext=jpg",
-  //     ice: true,
-  //   },
-  //   {
-  //     name: "Iced Macchiato",
-  //     description:
-  //       "Espresso combined with vanilla-flavoured syrup, milk and caramel sauce over ice.",
-  //     size: "Regular",
-  //     price: 4,
-  //     image:
-  //       "https://2.bp.blogspot.com/-7q5IHAl8pO4/XH7-8uT3aTI/AAAAAAAAW3Q/wITRN6vRWHcZwmYib64u_wqFRdWzCRQAACLcBGAs/s1600/StarbucksIcedCaramelCloudMacchiato.jpg",
-  //     ice: true,
-  //   },
+  {
+    name: "Flat White",
+    description:
+      "A delicious combination of Espresso and velvety milk, signed off with a perfect florette.",
+    size: "Regular",
+    price: 2,
+    image:
+      "https://www.jura.com/-/media/global/images/coffee-recipes/images-redesign-2020/flat_white_2000x1400px.jpg?la=en&hash=09CF109E21F5979B07505D0BF4CC8DA8D0511941",
+    ice: false,
+  },
+  {
+    name: "Lungo",
+    description:
+      "Less strong, but more bitter, than an espresso, because the additional hot water passing through the ground coffee extracts",
+    size: "Regular",
+    price: 1.5,
+    image:
+      "https://coffeemaker.top/wp-content/uploads/2021/04/What-is-lungo-coffee.jpg",
+    ice: false,
+  },
+  {
+    name: "Macchiato",
+    description:
+      "Freshly steamed milk with vanilla-flavoured syrup, marked with espresso and finished with caramel sauce.",
+    size: "Large",
+    price: 4,
+    image:
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/macchiato-1583406296.jpg",
+    ice: false,
+  },
+  {
+    name: "Macchiato",
+    description:
+      "Freshly steamed milk with vanilla-flavoured syrup, marked with espresso and finished with caramel sauce.",
+    size: "Regular",
+    price: 2,
+    image:
+      "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/macchiato-1583406296.jpg",
+    ice: false,
+  },
+  {
+    name: "Expresso Romano",
+    description:
+      "Short or long shot of espresso mixed with a teaspoon of sugar and served with a small piece of lemon rind",
+    size: "Regular",
+    price: 1.5,
+    image:
+      "https://static.wixstatic.com/media/86a32b_7af8d7de3d294319a43964c205510801~mv2.png/v1/fill/w_441,h_477,al_c/86a32b_7af8d7de3d294319a43964c205510801~mv2.png",
+    ice: false,
+  },
+  {
+    name: "Espresso Con Panna",
+    description:
+      "A shot of espresso with a generous dollop of whipped cream on top.",
+    size: "Regular",
+    price: 3.5,
+    image:
+      "https://www.nicepng.com/png/detail/59-591392_fireplace-solutions-cioccolata-con-panna.png",
+    ice: false,
+  },
+  {
+    name: "Morochino",
+    description:
+      "Served in a small glass and consists of a shot of espresso, cocoa powder and milk froth.",
+    size: "Regular",
+    price: 4,
+    image:
+      "https://laboratorioespresso.it/wp-content/uploads/2018/05/caffe-marocchino-710x448-1.jpg",
+    ice: false,
+  },
+  {
+    name: "Bicerin",
+    description:
+      "It is a traditional warm coffee concoction native to Turin, Italy, made of espresso, drinking chocolate and whole milk served layered in a small rounded glass.",
+    size: "Large",
+    price: 4.5,
+    image:
+      "https://lh3.googleusercontent.com/proxy/Qu_KtPXL0n67a1cxMN1ZUIukX6WEvx6Z0An7v-d-Fg85MywYfN9OYNthprmvmhSIRDAid7xH68BHsbbnLcTb5CGETlSqAmqeJrEoVScz3U_qcPEk50FE3xWVcbANHBZOYXoLFbkk2ITwuw",
+    ice: false,
+  },
+  {
+    name: "Bicerin",
+    description:
+      "It is a traditional warm coffee concoction native to Turin, Italy, made of espresso, drinking chocolate and whole milk served layered in a small rounded glass.",
+    size: "Regular",
+    price: 3.5,
+    image:
+      "https://lh3.googleusercontent.com/proxy/Qu_KtPXL0n67a1cxMN1ZUIukX6WEvx6Z0An7v-d-Fg85MywYfN9OYNthprmvmhSIRDAid7xH68BHsbbnLcTb5CGETlSqAmqeJrEoVScz3U_qcPEk50FE3xWVcbANHBZOYXoLFbkk2ITwuw",
+    ice: false,
+  },
+  {
+    name: "Galao",
+    description:
+      "Coffee with milk served in a tall glass with a shot of espresso and filled with steamed milk.",
+    size: "Large",
+    price: 5,
+    image:
+      "https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-Latte-Macchiato.jpg",
+    ice: false,
+  },
+  {
+    name: "Galao",
+    description:
+      "Coffee with milk served in a tall glass with a shot of espresso and filled with steamed milk.",
+    size: "Regular",
+    price: 4,
+    image:
+      "https://www.nespresso.com/ncp/res/uploads/recipes/nespresso-recipes-Latte-Macchiato.jpg",
+    ice: false,
+  },
+  {
+    name: "Ristretto",
+    description:
+      "Short shot (30 ml from a double basket) of a more highly concentrated espresso coffee.",
+    size: "Regular",
+    price: 3,
+    image:
+      "https://www.jura.com/-/media/global/images/coffee-recipes/images-redesign-2020/ristretto_2000x1400px.jpg?la=en&hash=E708695CD6B3D7F11F676E21FF7577141E8CBE20",
+    ice: false,
+  },
+  {
+    name: "Mocha",
+    description:
+      "Expertly steamed chocolate milk blended with espresso for a caffeinated chocolate treat.",
+    size: "Large",
+    price: 6,
+    image:
+      "https://whisk-res.cloudinary.com/image/upload/v1621831977/recipe/e078c3c5603422b78538a94dfa884e34.jpg",
+    ice: false,
+  },
+  {
+    name: "Mocha",
+    description:
+      "Expertly steamed chocolate milk blended with espresso for a caffeinated chocolate treat.",
+    size: "Regular",
+    price: 3,
+    image:
+      "https://whisk-res.cloudinary.com/image/upload/v1621831977/recipe/e078c3c5603422b78538a94dfa884e34.jpg",
+    ice: false,
+  },
+  {
+    name: "Iced Latte",
+    description: "Chilled milk over ice, capped with freshly shaken espresso.",
+    size: "Large",
+    price: 4,
+    image:
+      "https://en.cocktail.fabbri1905.com/imgpub/1917906/0/0/iced-latte-400x400.jpg",
+    ice: true,
+  },
+  {
+    name: "Iced Latte",
+    description: "Chilled milk over ice, capped with freshly shaken espresso.",
+    size: "Regular",
+    price: 3,
+    image:
+      "https://en.cocktail.fabbri1905.com/imgpub/1917906/0/0/iced-latte-400x400.jpg",
+    ice: true,
+  },
+  {
+    name: "Iced Cappucino",
+    description:
+      "A bold and balanced coffee, made with freshly shaken espresso and topped with whipped milk foam.",
+    size: "Regular",
+    price: 3,
+    image:
+      "https://media1.popsugar-assets.com/files/thumbor/cLu_93KWp9DUyyiiv08KlXOorac/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2021/04/29/539/n/42718227/eda9f6eb960c1f39_Iced_Cappuccino/i/Iced-Cappuccino.jpg",
+    ice: true,
+  },
+  {
+    name: "Iced Cappucino",
+    description:
+      "A bold and balanced coffee, made with freshly shaken espresso and topped with whipped milk foam.",
+    size: "Large",
+    price: 4,
+    image:
+      "https://media1.popsugar-assets.com/files/thumbor/cLu_93KWp9DUyyiiv08KlXOorac/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2021/04/29/539/n/42718227/eda9f6eb960c1f39_Iced_Cappuccino/i/Iced-Cappuccino.jpg",
+    ice: true,
+  },
+  {
+    name: "Glace",
+    description: "Coffee with ice-cream",
+    size: "Regular",
+    price: 6,
+    image:
+      "https://img.freepik.com/free-photo/chocolate-coffee-glace-glass-concrete-surface-decorated-with-beans-cinnamon_219193-4558.jpg?size=626&ext=jpg",
+    ice: true,
+  },
+  {
+    name: "Glace",
+    description: "Coffee with ice-cream",
+    size: "Large",
+    price: 7,
+    image:
+      "https://img.freepik.com/free-photo/chocolate-coffee-glace-glass-concrete-surface-decorated-with-beans-cinnamon_219193-4558.jpg?size=626&ext=jpg",
+    ice: true,
+  },
+  {
+    name: "Iced Macchiato",
+    description:
+      "Espresso combined with vanilla-flavoured syrup, milk and caramel sauce over ice.",
+    size: "Regular",
+    price: 4,
+    image:
+      "https://2.bp.blogspot.com/-7q5IHAl8pO4/XH7-8uT3aTI/AAAAAAAAW3Q/wITRN6vRWHcZwmYib64u_wqFRdWzCRQAACLcBGAs/s1600/StarbucksIcedCaramelCloudMacchiato.jpg",
+    ice: true,
+  },
 
-  //   {
-  //     name: "Iced Americano ",
-  //     description: "Classic black coffee gently sweetened and served over ice.",
-  //     size: "Regular",
-  //     price: 2,
-  //     image:
-  //       "https://d2aam04nmhpdf8.cloudfront.net/images/images/000/043/560/xlarge/25636_Bandit_Cold_Brew_Americano_Redeye.png?1612834363",
-  //     ice: true,
-  //   },
-  //   {
-  //     name: "Iced Americano ",
-  //     description: "Classic black coffee gently sweetened and served over ice.",
-  //     size: "Large",
-  //     price: 2.5,
-  //     image:
-  //       "https://d2aam04nmhpdf8.cloudfront.net/images/images/000/043/560/xlarge/25636_Bandit_Cold_Brew_Americano_Redeye.png?1612834363",
-  //     ice: true,
-  //   },
-  //   {
-  //     name: "Frappe",
-  //     description:
-  //       "Coffee meets milk and ice in a blender for a rumble and tumble topped with a swirl of whipped cream and together they create one of our original Frappuccino beverages.",
-  //     size: "Large",
-  //     price: 4,
-  //     image:
-  //       "https://images.squarespace-cdn.com/content/v1/5d0bb2211fd72f00015380bb/1582750209026-EHDMHQY942OJ3XAFD2P8/_KRU9272.jpg?format=2500w",
-  //     ice: true,
-  //   },
-  //   {
-  //     name: "Frappe",
-  //     description:
-  //       "Coffee meets milk and ice in a blender for a rumble and tumble topped with a swirl of whipped cream and together they create one of our original Frappuccino beverages.",
-  //     size: "Regular",
-  //     price: 3.5,
-  //     image:
-  //       "https://images.squarespace-cdn.com/content/v1/5d0bb2211fd72f00015380bb/1582750209026-EHDMHQY942OJ3XAFD2P8/_KRU9272.jpg?format=2500w",
-  //     ice: true,
-  //   },
-  //   {
-  //     name: "Freddo",
-  //     description:
-  //       "Involves blending a hot double shot of espresso with ice and sugar in a drink mixer, creating a signature foam.",
-  //     size: "Large",
-  //     price: 3,
-  //     image:
-  //       "http://cdn.shopify.com/s/files/1/2502/9096/articles/60C37D3D-4442-481D-BCAE-F0C45FE492A6_1024x.jpg?v=1590687332",
-  //     ice: true,
-  //   },
-  //   {
-  //     name: "Freddo",
-  //     description:
-  //       "Involves blending a hot double shot of espresso with ice and sugar in a drink mixer, creating a signature foam.",
-  //     size: "Regular",
-  //     price: 3.5,
-  //     image:
-  //       "http://cdn.shopify.com/s/files/1/2502/9096/articles/60C37D3D-4442-481D-BCAE-F0C45FE492A6_1024x.jpg?v=1590687332",
-  //     ice: true,
-  //   },
-  //   {
-  //     name: "Iced Mocha",
-  //     description:
-  //       "An indulgent iced coffee made with a delicious chocolate sauce freshly shaken with espresso and poured over iced cold milk for a caffeinated chocolate treat.",
-  //     size: "Large",
-  //     price: 4,
-  //     image:
-  //       "https://www.pngkey.com/png/detail/302-3026277_rich-and-chocolatey-our-iced-mocha-brings-together.png",
-  //     ice: true,
-  //   },
+  {
+    name: "Iced Americano ",
+    description: "Classic black coffee gently sweetened and served over ice.",
+    size: "Regular",
+    price: 2,
+    image:
+      "https://d2aam04nmhpdf8.cloudfront.net/images/images/000/043/560/xlarge/25636_Bandit_Cold_Brew_Americano_Redeye.png?1612834363",
+    ice: true,
+  },
+  {
+    name: "Iced Americano ",
+    description: "Classic black coffee gently sweetened and served over ice.",
+    size: "Large",
+    price: 2.5,
+    image:
+      "https://d2aam04nmhpdf8.cloudfront.net/images/images/000/043/560/xlarge/25636_Bandit_Cold_Brew_Americano_Redeye.png?1612834363",
+    ice: true,
+  },
+  {
+    name: "Frappe",
+    description:
+      "Coffee meets milk and ice in a blender for a rumble and tumble topped with a swirl of whipped cream and together they create one of our original Frappuccino beverages.",
+    size: "Large",
+    price: 4,
+    image:
+      "https://images.squarespace-cdn.com/content/v1/5d0bb2211fd72f00015380bb/1582750209026-EHDMHQY942OJ3XAFD2P8/_KRU9272.jpg?format=2500w",
+    ice: true,
+  },
+  {
+    name: "Frappe",
+    description:
+      "Coffee meets milk and ice in a blender for a rumble and tumble topped with a swirl of whipped cream and together they create one of our original Frappuccino beverages.",
+    size: "Regular",
+    price: 3.5,
+    image:
+      "https://images.squarespace-cdn.com/content/v1/5d0bb2211fd72f00015380bb/1582750209026-EHDMHQY942OJ3XAFD2P8/_KRU9272.jpg?format=2500w",
+    ice: true,
+  },
+  {
+    name: "Freddo",
+    description:
+      "Involves blending a hot double shot of espresso with ice and sugar in a drink mixer, creating a signature foam.",
+    size: "Large",
+    price: 3,
+    image:
+      "http://cdn.shopify.com/s/files/1/2502/9096/articles/60C37D3D-4442-481D-BCAE-F0C45FE492A6_1024x.jpg?v=1590687332",
+    ice: true,
+  },
+  {
+    name: "Freddo",
+    description:
+      "Involves blending a hot double shot of espresso with ice and sugar in a drink mixer, creating a signature foam.",
+    size: "Regular",
+    price: 3.5,
+    image:
+      "http://cdn.shopify.com/s/files/1/2502/9096/articles/60C37D3D-4442-481D-BCAE-F0C45FE492A6_1024x.jpg?v=1590687332",
+    ice: true,
+  },
+  {
+    name: "Iced Mocha",
+    description:
+      "An indulgent iced coffee made with a delicious chocolate sauce freshly shaken with espresso and poured over iced cold milk for a caffeinated chocolate treat.",
+    size: "Large",
+    price: 4,
+    image:
+      "https://www.pngkey.com/png/detail/302-3026277_rich-and-chocolatey-our-iced-mocha-brings-together.png",
+    ice: true,
+  },
 
-  //   {
-  //     name: "Iced Mocha",
-  //     description:
-  //       "An indulgent iced coffee made with a delicious chocolate sauce freshly shaken with espresso and poured over iced cold milk for a caffeinated chocolate treat.",
-  //     size: "Regular",
-  //     price: 3,
-  //     image:
-  //       "https://www.pngkey.com/png/detail/302-3026277_rich-and-chocolatey-our-iced-mocha-brings-together.png",
-  //     ice: true,
-  //   },
+  {
+    name: "Iced Mocha",
+    description:
+      "An indulgent iced coffee made with a delicious chocolate sauce freshly shaken with espresso and poured over iced cold milk for a caffeinated chocolate treat.",
+    size: "Regular",
+    price: 3,
+    image:
+      "https://www.pngkey.com/png/detail/302-3026277_rich-and-chocolatey-our-iced-mocha-brings-together.png",
+    ice: true,
+  },
 ];
 
 const specialRequestList = [
