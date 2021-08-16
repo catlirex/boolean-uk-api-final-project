@@ -1,4 +1,4 @@
-const { special_request } = require("../../utils/database");
+const { specialRequest } = require("../../utils/database");
 
 const getAll = async (req, res) => {
   try {
