@@ -28,7 +28,7 @@ const getUserById = async (req, res) => {
 
 const createUser = async (req, res) => {
   const { name, phone_number } = req.body;
-  
+
   try {
     if (name && typeof phone_number === "number") {
       const createdUser = await user.create({
