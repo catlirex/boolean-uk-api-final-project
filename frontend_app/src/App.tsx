@@ -1,15 +1,15 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import "./App.css";
+import LoginPage from "./Pages/LoginPage";
 
 function App() {
   return (
     <div className="background-image">
       <div className="App">
-        <h1>Hello there</h1>
         <Switch>
           <Route path="/" exact>
-            {/* <LoginPage/> */}
+            <LoginPage />
           </Route>
 
           <Route path="/user/:id" exact>

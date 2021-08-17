@@ -6,7 +6,9 @@
 }
 
 .App {
+  padding: 0 5px;
   padding-top: 30px;
+
   margin: 0 46px;
   width: 300px;
   height: 660px;
