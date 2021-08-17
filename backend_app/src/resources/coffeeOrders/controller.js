@@ -1,7 +1,7 @@
 const { coffeeOrder } = require("../../utils/database");
 
 async function getOneOrder(req, res) {
-  const id = Number(req.params.id);
+  const id = Number(req.params.transactionId);
   try {
     const result = await coffeeOrder.findUnique({
       where: { id },
@@ -46,7 +46,7 @@ function newOrderChecker(newOrder) {
   const orderNotNullKey = ["quantity", "transaction_id", "coffee_id"];
   let lengthMatch = false;
 
-  const hasAllKeys = orderNotNullKey.every((item) =>
+  const hasAllKeys = orderNotNullKey.every(item =>
     newOrder.hasOwnProperty(item)
   );
 

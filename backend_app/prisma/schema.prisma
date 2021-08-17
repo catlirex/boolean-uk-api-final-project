@@ -67,10 +67,10 @@ model SpecialRequest_CoffeeOrder {
   id Int @id @default(autoincrement())
 
   specialRequestId Int
-  specialRequest   SpecialRequest @relation(fields: [specialRequestId], references: [id])
+  specialRequest   SpecialRequest @relation(fields: [specialRequestId], references: [id], onDelete: Cascade)
 
   coffeeOrderId Int
-  coffeeOrder   CoffeeOrder @relation(fields: [coffeeOrderId], references: [id])
+  coffeeOrder   CoffeeOrder @relation(fields: [coffeeOrderId], references: [id], onDelete: Cascade)
 }
 
 enum Status {
