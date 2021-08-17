@@ -47,7 +47,7 @@ model SpecialRequest {
   price   Float
   type    String
 
-  coffee_orders CoffeeOrder[]
+  coffeeOrders SpecialRequest_CoffeeOrder[]
 }
 
 model CoffeeOrder {
@@ -60,7 +60,17 @@ model CoffeeOrder {
   coffee_id Int
   coffee    Coffee @relation(fields: [coffee_id], references: [id], onDelete: Cascade)
 
-  special_requests SpecialRequest[]
+  specialRequests SpecialRequest_CoffeeOrder[]
+}
+
+model SpecialRequest_CoffeeOrder {
+  id Int @id @default(autoincrement())
+
+  specialRequestId Int
+  specialRequest   SpecialRequest @relation(fields: [specialRequestId], references: [id])
+
+  coffeeOrderId Int
+  coffeeOrder   CoffeeOrder @relation(fields: [coffeeOrderId], references: [id])
 }
 
 enum Status {
