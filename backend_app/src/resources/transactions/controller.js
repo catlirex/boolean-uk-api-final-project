@@ -1,4 +1,4 @@
-const { transaction } = require("../../utils/database");
+const { transaction, coffeeOrder } = require("../../utils/database");
 
 const getTransactionDetailsById = async (req, res) => {
   const id = Number(req.params.id);
@@ -65,8 +65,82 @@ const todaysTransactionsForOneShop = async (req, res) => {
   }
 };
 
+const createTransaction = async (req, res) => {
+  const { coffee_orders, ...newTransaction } = req.body;
+
+  try {
+    const createdTransaction = await transaction.create({
+      data: newTransaction,
+    });
+    for (const coffeeOrderData of coffee_orders) {
+      const { specialRequests, quantity, coffee_id } = coffeeOrderData;
+      const createdOrder = await coffeeOrder.create({
+        data: {
+          quantity,
+          transaction: { connect: { id: createdTransaction.id } },
+          coffee: { connect: { id: coffee_id } },
+          specialRequests: { create: specialRequests },
+        },
+      });
+    }
+
+    const createdTransactionWithOrder = await transaction.findUnique({
+      where: { id: createdTransaction.id },
+      include: { coffeeOrder: { include: { specialRequests: true } } },
+    });
+
+    if (createdTransactionWithOrder) res.json(createdTransactionWithOrder);
+    if (!createdTransactionWithOrder) res.json({ msg: "Item not found" });
+  } catch (e) {
+    console.log(e);
+    res.json(e.message);
+  }
+};
+
+const patchTransaction = async (req, res) => {
+  const id = Number(req.params.id);
+  const updateInfo = req.body;
+  try {
+    const transactionExist = await transaction.findUnique({
+      where: { id },
+    });
+    if (transactionExist) {
+      const result = await transaction.update({
+        where: {
+          id,
+        },
+        data: { ...transactionExist, ...updateInfo },
+      });
+
+      if (result) res.json(result);
+      if (!transactionExist || !result) res.json({ msg: "Item not found" });
+    }
+  } catch (e) {
+    console.log(e);
+    res.json(e.message);
+  }
+};
+
+const deleteTrascaction = async (req, res) => {
+  const id = Number(req.params.id);
+
+  try {
+    const result = await transaction.delete({
+      where: { id },
+    });
+    if (result) res.json(result);
+    if (!result) res.json({ msg: "Item not found" });
+  } catch (e) {
+    console.log(e);
+    res.json(e.message);
+  }
+};
+
 module.exports = {
   getTransactionDetailsById,
   getAllTransactionsForOneUser,
   todaysTransactionsForOneShop,
+  createTransaction,
+  patchTransaction,
+  deleteTrascaction,
 };
