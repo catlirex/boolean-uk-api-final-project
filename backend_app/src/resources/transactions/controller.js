@@ -1,11 +1,18 @@
 const { transaction } = require("../../utils/database");
 
-const getTransactionWithCoffeeOrdersById = async (req, res) => {
+const getTransactionDetailsById = async (req, res) => {
   const id = Number(req.params.id);
   try {
     const result = await transaction.findUnique({
       where: { id },
-      include: { coffeeOrder: true },
+      include: {
+        coffeeOrder: {
+          include: {
+            specialRequests: { include: { specialRequest: true } },
+            coffee: { select: { name: true, size: true } },
+          },
+        },
+      },
     });
     if (result) res.json(result);
     if (!result) res.json({ msg: "Item not found" });
@@ -59,7 +66,7 @@ const todaysTransactionsForOneShop = async (req, res) => {
 };
 
 module.exports = {
-  getTransactionWithCoffeeOrdersById,
+  getTransactionDetailsById,
   getAllTransactionsForOneUser,
   todaysTransactionsForOneShop,
 };
