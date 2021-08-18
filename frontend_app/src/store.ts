@@ -6,7 +6,7 @@ export type UserType = {
   phone_number: Number;
 };
 
-type ShopType = {
+export type ShopType = {
   id: Number;
   name: string;
   image: string;
@@ -42,6 +42,24 @@ export type CoffeeType = {
   image: string;
 };
 
+export type CoffeeOrderType = {
+  id: Number;
+  quantity: Number;
+  transaction_id: Number;
+  coffee_id: Number;
+  coffee?: CoffeeType;
+};
+
+export type TransactionHistory = {
+  estimated_pickup_time: string;
+  id: Number;
+  shop_id: Number;
+  status: String;
+  transaction_time: String;
+  user_id: Number;
+  coffeeOrder?: CoffeeOrderType[];
+};
+
 type Object = {
   [key: string]: string;
 };
@@ -52,6 +70,8 @@ type StoreType = {
   setLogInUser: (e: React.SyntheticEvent) => void;
   loginError: null | undefined | "failToCreate";
   loginUser: null | UserType;
+  userTransactionHistory: TransactionHistory[];
+  getUserTransactionHistory: () => void;
   setNewUser: (name: undefined | string, phone: string | null) => void;
   shops: ShopType[];
   fetchShops: () => void;
@@ -96,6 +116,15 @@ const useStore = create<StoreType>((set, get) => ({
 
     if (createdUser.Error) set({ loginError: "failToCreate" });
     else set({ loginUser: createdUser });
+  },
+
+  userTransactionHistory: [],
+  getUserTransactionHistory: async () => {
+    const userID = get().loginUser?.id;
+    const allTransaction = await fetch(
+      `http://localhost:3000/transactions/user/${userID}`
+    ).then((res) => res.json());
+    set({ userTransactionHistory: allTransaction });
   },
 
   shops: [],

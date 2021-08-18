@@ -60,7 +60,9 @@ export default function Footer() {
             Order Coffee
           </ColoredButton>
           <ColoredButton>
-            <ConfirmationNumberIcon />
+            <ConfirmationNumberIcon
+              onClick={() => history.push("/user/transactionRecord")}
+            />
           </ColoredButton>
         </ButtonGroup>
       </div>
