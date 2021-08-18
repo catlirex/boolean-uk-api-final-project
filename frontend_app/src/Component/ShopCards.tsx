@@ -36,12 +36,6 @@ export default function ShopCards() {
   const history = useHistory();
 
   useEffect(() => {
-    if (cart?.shop_id) {
-      history.push("/coffee");
-    }
-  }, [cart]);
-
-  useEffect(() => {
     fetchShops();
   }, [fetchShops]);
 

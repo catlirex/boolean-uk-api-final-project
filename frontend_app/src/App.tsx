@@ -20,12 +20,16 @@ function App() {
             <UserPage />
           </Route>
 
-          <Route path="/shop" exact>
+          <Route path="/user/shopList" exact>
             <ShopPage />
           </Route>
 
-          <Route path="/coffee" exact>
+          <Route path="/user/coffeeList" exact>
             <CoffeeList />
+          </Route>
+
+          <Route path="/user/transactionRecord" exact>
+            {/* transaction record list */}
           </Route>
 
           <Route>

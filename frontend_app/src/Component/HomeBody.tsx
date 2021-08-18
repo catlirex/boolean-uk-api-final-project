@@ -63,7 +63,7 @@ export default function HomeBody() {
     <UserHomeContainer>
       <div
         className="new-order container"
-        onClick={() => history.push(`/shop`)}
+        onClick={() => history.push(`/user/shopList`)}
       >
         <img className="coffee-img" src={coffeeImg} alt="coffee image" />
         <h1>Make your order</h1>

@@ -26,7 +26,7 @@ export default function ShopPage() {
   return (
     <ShopPageDiv>
       <Header />
-      {/* body */}
+
       <ShopCards />
       <Footer />
     </ShopPageDiv>
