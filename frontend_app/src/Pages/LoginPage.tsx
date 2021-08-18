@@ -44,7 +44,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (loginUser && loginUser !== "failToCreate" && loginUser.id)
-      history.push(`/users`);
+      history.push(`/user/${loginUser.id}`);
     else return;
   }, [loginUser]);
 

@@ -13,7 +13,7 @@ function App() {
             <LoginPage />
           </Route>
 
-          <Route path="/user/:id" exact>
+          <Route path="/user/:id">
             <UserPage />
           </Route>
 
