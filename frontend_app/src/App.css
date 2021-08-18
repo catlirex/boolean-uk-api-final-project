@@ -14,6 +14,7 @@
   height: 660px;
   border: 2px solid black;
   border-radius: 30px;
+  background-color: #1a1a1a;
 }
 
 .background-image {
@@ -23,4 +24,6 @@
   height: 700px;
   background-image: url("./assets/iphone_bg.png");
   background-size: cover;
+  margin-left: auto;
+  margin-right: auto;
 }
