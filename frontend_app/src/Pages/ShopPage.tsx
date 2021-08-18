@@ -5,7 +5,6 @@ import Header from "../Component/Header";
 import Footer from "../Component/Footer";
 
 import styled from "styled-components";
-
 import ShopCards from "../Component/ShopCards";
 import useStore from "../store";
 

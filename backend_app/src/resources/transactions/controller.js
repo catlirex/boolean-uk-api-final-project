@@ -27,6 +27,7 @@ const getAllTransactionsForOneUser = async (req, res) => {
   try {
     const result = await transaction.findMany({
       where: { user: { id } },
+      include: { coffeeOrder: { include: { coffee: true } } },
     });
     if (result) res.json(result);
     if (!result) res.json({ msg: "Item not found" });

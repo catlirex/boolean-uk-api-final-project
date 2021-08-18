@@ -6,6 +6,7 @@ import CoffeeList from "./Pages/CoffeeListPage";
 import LoginPage from "./Pages/LoginPage";
 import ShopPage from "./Pages/ShopPage";
 import UserPage from "./Pages/UserPage";
+import TransactionListPage from "./Pages/TransactionListPage";
 
 function App() {
   return (
@@ -14,10 +15,6 @@ function App() {
         <Switch>
           <Route path="/" exact>
             <LoginPage />
-          </Route>
-
-          <Route path="/user/:id">
-            <UserPage />
           </Route>
 
           <Route path="/user/shopList" exact>
@@ -29,7 +26,11 @@ function App() {
           </Route>
 
           <Route path="/user/transactionRecord" exact>
-            {/* transaction record list */}
+            <TransactionListPage />
+          </Route>
+
+          <Route path="/user/:id">
+            <UserPage />
           </Route>
 
           <Route>
