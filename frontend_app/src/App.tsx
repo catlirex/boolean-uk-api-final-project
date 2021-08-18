@@ -16,10 +16,6 @@ function App() {
             <LoginPage />
           </Route>
 
-          <Route path="/user/:id">
-            <UserPage />
-          </Route>
-
           <Route path="/user/shopList" exact>
             <ShopPage />
           </Route>
@@ -28,8 +24,16 @@ function App() {
             <CoffeeList />
           </Route>
 
+          <Route path="/user/coffeeDetails" exact>
+            <CoffeeDetailsPage />
+          </Route>
+
           <Route path="/user/transactionRecord" exact>
             {/* transaction record list */}
+          </Route>
+
+          <Route path="/user/:id">
+            <UserPage />
           </Route>
 
           <Route>

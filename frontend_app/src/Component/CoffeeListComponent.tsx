@@ -7,6 +7,7 @@ import { APP_COLOR } from "../consistent";
 import { CoffeeType } from "../store";
 
 import { removeDuplicateObjectFromArray } from "../helper";
+import { useHistory } from "react-router-dom";
 
 const CoffeeLIstDiv = styled.div`
   display: grid;
@@ -54,21 +55,36 @@ const CoffeeLIstUl = styled.ul`
 `;
 
 export default function CoffeeListComponent() {
-  const coffeeList = useStore((store) => store.coffeeList);
-  const fetchCoffeeList = useStore((store) => store.fetchCoffeeList);
+  const coffeeList = useStore(store => store.coffeeList);
+  const fetchCoffeeList = useStore(store => store.fetchCoffeeList);
+
+  const selectedCoffee = useStore(store => store.selectedCoffee);
+  const setSelectedCoffee = useStore(store => store.setSelectedCoffee);
 
   const uniqueCoffeeList = removeDuplicateObjectFromArray<CoffeeType>(
     coffeeList,
     "name"
   );
 
+  const history = useHistory();
+
+  const handleSubmit = (coffee: CoffeeType) => {
+    setSelectedCoffee(coffee.name);
+    history.push("/user/coffeeDetails");
+  };
+
   useEffect(() => {
     fetchCoffeeList();
   }, [fetchCoffeeList]);
   return (
     <CoffeeLIstUl>
-      {uniqueCoffeeList.map((coffee: CoffeeType) => (
-        <CoffeeLIstDiv>
+      {uniqueCoffeeList.map((coffee: CoffeeType, index) => (
+        <CoffeeLIstDiv
+          key={index}
+          onClick={() => {
+            handleSubmit(coffee);
+          }}
+        >
           <div className="coffee-image">
             <img
               src={coffee.image}
