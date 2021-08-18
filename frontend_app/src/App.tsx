@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import "./App.css";
 import LoginPage from "./Pages/LoginPage";
+import UserPage from "./Pages/UserPage";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
           </Route>
 
           <Route path="/user/:id" exact>
-            {/* <UserPage/> */}
+            <UserPage />
           </Route>
 
           <Route path="/shop/:id" exact>

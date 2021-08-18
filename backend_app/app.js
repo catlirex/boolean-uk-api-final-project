@@ -1,6 +1,5 @@
 const express = require("express");
-const path = require("path");
-
+const cors = require("cors");
 const logger = require("morgan");
 
 const app = express();
@@ -16,6 +15,7 @@ const transactionsRouter = require("./src/resources/transactions/router");
 
 app.use(logger("dev"));
 app.use(express.json());
+app.use(cors());
 
 // Routes
 

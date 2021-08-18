@@ -10,13 +10,13 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-const getUserById = async (req, res) => {
-  const id = parseInt(req.params.id);
+const getUserByPhone = async (req, res) => {
+  const phone = parseInt(req.params.phone);
 
   try {
     const aUser = await user.findUnique({
       where: {
-        id,
+        phone_number: phone,
       },
     });
 
@@ -44,4 +44,4 @@ const createUser = async (req, res) => {
   }
 };
 
-module.exports = { getAllUsers, getUserById, createUser };
+module.exports = { getAllUsers, getUserByPhone, createUser };

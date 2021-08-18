@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, withStyles } from "@material-ui/core";
 import styled from "styled-components";
 import LoginForm from "../Component/LoginPageComponent/LoginForm";
 import useStore from "../store";
 import { APP_COLOR } from "../consistent";
+import { useHistory } from "react-router";
 
 const SquareButton = withStyles(() => ({
   root: {
@@ -19,7 +20,7 @@ const SquareButton = withStyles(() => ({
 
 const LoginPageDiv = styled.div`
   display: grid;
-  gap: 20px;
+
   height: 100%;
   color: ${APP_COLOR.wheat};
   .select-role-buttons {
@@ -30,11 +31,23 @@ const LoginPageDiv = styled.div`
   .logo {
     width: 100%;
     padding: 0;
+    height: 150px;
+    object-fit: cover;
   }
 `;
 
 export default function LoginPage() {
+  const loginUser = useStore((state) => state.loginUser);
   const selectRole = useStore((state) => state.selectRole);
+
+  const history = useHistory();
+
+  useEffect(() => {
+    if (loginUser && loginUser !== "failToCreate" && loginUser.id)
+      history.push(`/users`);
+    else return;
+  }, [loginUser]);
+
   return (
     <LoginPageDiv>
       <header>

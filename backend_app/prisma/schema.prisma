@@ -14,7 +14,7 @@ generator client {
 
 model User {
   id           Int    @id @default(autoincrement())
-  name         String
+  name         String @default("New User")
   phone_number Int    @unique
 
   transactions Transaction[]

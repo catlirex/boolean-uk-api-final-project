@@ -3,20 +3,21 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import useStore from "../../store";
 import { APP_COLOR } from "../../consistent";
+import UserLoginForm from "../LoginPageComponent/UserLoginForm";
 
 const LoginFormContainer = styled.div`
   display: grid;
   gap: 20px;
-  height: 200px;
+  height: 300px;
   width: 80%;
   justify-self: center;
   text-align: center;
   border-radius: 15px;
-  background-color: ${APP_COLOR.lightBrown};
+  background-color: ${APP_COLOR.paleWheat};
 `;
 
 const AnimationDiv = styled.div`
-  height: 200px;
+  height: 300px;
   width: 80%;
   justify-self: center;
   h1 {
@@ -92,7 +93,7 @@ export default function LoginForm() {
   if (loginRole === "user")
     return (
       <LoginFormContainer>
-        <h3> Please enter mobile number</h3>
+        <UserLoginForm />
       </LoginFormContainer>
     );
 
