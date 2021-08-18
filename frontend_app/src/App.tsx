@@ -20,11 +20,11 @@ function App() {
             <UserPage />
           </Route>
 
-          <Route path="/shop/:id" exact>
+          <Route path="/shop" exact>
             <ShopPage />
           </Route>
 
-          <Route path="/coffee">
+          <Route path="/coffee" exact>
             <CoffeeList />
           </Route>
 

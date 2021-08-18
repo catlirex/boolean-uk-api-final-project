@@ -24,7 +24,14 @@ const CoffeeLIstDiv = styled.div`
 
   .coffee-image {
     height: 100px;
-    widht: 100px;
+    width: 100px;
+    object-fit: cover;
+  }
+  .coffee-name {
+    font-size: 1rem;
+    text-align: center;
+    font-weight: 300;
+    font-variant-caps: petite-caps;
   }
 `;
 const CoffeeLIstUl = styled.ul`
@@ -32,8 +39,6 @@ const CoffeeLIstUl = styled.ul`
   align-items: center;
   gap: 5px;
   grid-template-columns: 1fr 1fr;
-
-  background-color: ${APP_COLOR.white};
 
   height: 100%;
 
@@ -49,8 +54,8 @@ const CoffeeLIstUl = styled.ul`
 `;
 
 export default function CoffeeListComponent() {
-  const coffeeList = useStore(store => store.coffeeList);
-  const fetchCoffeeList = useStore(store => store.fetchCoffeeList);
+  const coffeeList = useStore((store) => store.coffeeList);
+  const fetchCoffeeList = useStore((store) => store.fetchCoffeeList);
 
   const uniqueCoffeeList = removeDuplicateObjectFromArray<CoffeeType>(
     coffeeList,

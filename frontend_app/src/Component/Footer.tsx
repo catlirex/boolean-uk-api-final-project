@@ -7,6 +7,7 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 import HomeIcon from "@material-ui/icons/Home";
 import ConfirmationNumberIcon from "@material-ui/icons/ConfirmationNumber";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import { useHistory } from "react-router-dom";
 
 const StyledFooter = styled.footer`
   justify-self: center;
@@ -28,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
 const ColoredButton = withStyles(() => ({
   root: {
     height: "40px",
-
+    borderBottomLeftRadius: "10px",
+    borderBottomRightRadius: "10px",
     margin: "0",
     borderRadius: 0,
     color: APP_COLOR.darkGray,
@@ -40,6 +42,7 @@ const ColoredButton = withStyles(() => ({
 }))(Button);
 
 export default function Footer() {
+  const history = useHistory();
   const classes = useStyles();
   return (
     <StyledFooter>
@@ -48,11 +51,11 @@ export default function Footer() {
           variant="contained"
           aria-label="contained primary button group"
         >
-          <ColoredButton>
+          <ColoredButton onClick={() => history.push("/")}>
             <HomeIcon />
             Home
           </ColoredButton>
-          <ColoredButton>
+          <ColoredButton onClick={() => history.push("/shop")}>
             <ShoppingBasketIcon />
             Order Coffee
           </ColoredButton>

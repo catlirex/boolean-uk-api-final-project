@@ -8,6 +8,7 @@ const StyledHeader = styled.header`
   display: grid;
   grid-auto-flow: column;
   background-color: ${APP_COLOR.darkGray};
+  align-items: center;
   .header-logo {
     height: 60px;
     width: 60px;
