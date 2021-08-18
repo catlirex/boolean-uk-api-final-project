@@ -25,8 +25,16 @@ function App() {
             <CoffeeList />
           </Route>
 
+          <Route path="/user/coffeeDetails" exact>
+            <CoffeeDetailsPage />
+          </Route>
+
           <Route path="/user/transactionRecord" exact>
             <TransactionListPage />
+          </Route>
+
+          <Route path="/user/:id">
+            <UserPage />
           </Route>
 
           <Route path="/user/:id">

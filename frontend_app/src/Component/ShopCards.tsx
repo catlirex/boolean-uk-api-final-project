@@ -29,9 +29,9 @@ const ShopCardUl = styled.ul`
 `;
 
 export default function ShopCards() {
-  const fetchShops = useStore((store) => store.fetchShops);
-  const shops = useStore((store) => store.shops);
-  const addShopIdToCart = useStore((store) => store.addShopIdToCart);
+  const fetchShops = useStore(store => store.fetchShops);
+  const shops = useStore(store => store.shops);
+  const addShopIdToCart = useStore(store => store.addShopIdToCart);
   const history = useHistory();
 
   function handleClick(shop: ShopType) {
