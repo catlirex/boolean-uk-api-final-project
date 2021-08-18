@@ -34,6 +34,7 @@ export default function UserLoginForm() {
   const setLogInUser = useStore((state) => state.setLogInUser);
   const setNewUser = useStore((state) => state.setNewUser);
   const loginUser = useStore((state) => state.loginUser);
+  const loginError = useStore((state) => state.loginError);
   const [phone, setPhone] = useState<null | string>(null);
   const [name, setName] = useState(undefined);
 
@@ -51,9 +52,9 @@ export default function UserLoginForm() {
     <UserForm onSubmit={(e) => handleLogin(e)}>
       <div className="tagline">
         <h1>We brew for you</h1>
-        {loginUser === undefined ? (
+        {loginError === undefined ? (
           <h2>User Not found </h2>
-        ) : loginUser === "failToCreate" ? (
+        ) : loginError === "failToCreate" ? (
           <h2>User exist, click login</h2>
         ) : (
           <h2>Click and collect in 5 mins</h2>

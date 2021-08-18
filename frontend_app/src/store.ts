@@ -36,7 +36,8 @@ type StoreType = {
   loginRole: null | "user" | "shop";
   selectRole: (role: "user" | "shop") => void;
   setLogInUser: (e: React.SyntheticEvent) => void;
-  loginUser: null | UserType | undefined | "failToCreate";
+  loginError: null | undefined | "failToCreate";
+  loginUser: null | UserType;
   setNewUser: (name: undefined | string, phone: string | null) => void;
   shops: ShopType[];
   fetchShops: () => void;
@@ -50,6 +51,7 @@ const useStore = create<StoreType>((set, get) => ({
     if (get().loginRole === role) set({ loginRole: null });
     else set({ loginRole: role });
   },
+  loginError: null,
   loginUser: null,
   setLogInUser: async (e) => {
     const target = e.target as typeof e.target & {
@@ -60,7 +62,7 @@ const useStore = create<StoreType>((set, get) => ({
     ).then((res) => res.json());
 
     if (data) set({ loginUser: data });
-    else set({ loginUser: undefined });
+    else set({ loginError: undefined });
   },
   setNewUser: async (name, phone) => {
     const submitNewUser = {
@@ -76,7 +78,7 @@ const useStore = create<StoreType>((set, get) => ({
       body: JSON.stringify(submitNewUser),
     }).then((res) => res.json());
 
-    if (createdUser.Error) set({ loginUser: "failToCreate" });
+    if (createdUser.Error) set({ loginError: "failToCreate" });
     else set({ loginUser: createdUser });
   },
 
