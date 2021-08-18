@@ -5,6 +5,10 @@
   font-family: "Roboto", sans-serif;
 }
 
+::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
+}
+
 .App {
   padding: 0 5px;
   padding-top: 30px;

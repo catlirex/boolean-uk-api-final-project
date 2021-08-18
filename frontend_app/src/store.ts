@@ -32,6 +32,20 @@ type SpecialRequestTypeInCart = {
   specialRequestId: Number;
 };
 
+export type CoffeeType = {
+  id: Number;
+  name: string;
+  size: Number;
+  price: Number;
+  description: string;
+  ice: boolean;
+  image: string;
+};
+
+type Object = {
+  [key: string]: string;
+};
+
 type StoreType = {
   loginRole: null | "user" | "shop";
   selectRole: (role: "user" | "shop") => void;
@@ -43,23 +57,25 @@ type StoreType = {
   fetchShops: () => void;
   cart: CartType | {};
   addShopIdToCart: (id: Number) => void;
+  coffeeList: CoffeeType[] | [];
+  fetchCoffeeList: () => void;
 };
 
 const useStore = create<StoreType>((set, get) => ({
   loginRole: null,
-  selectRole: (role) => {
+  selectRole: role => {
     if (get().loginRole === role) set({ loginRole: null });
     else set({ loginRole: role });
   },
   loginError: null,
   loginUser: null,
-  setLogInUser: async (e) => {
+  setLogInUser: async e => {
     const target = e.target as typeof e.target & {
       phone: { value: string };
     };
     const data = await fetch(
       `http://localhost:3000/users/${target.phone.value}`
-    ).then((res) => res.json());
+    ).then(res => res.json());
 
     if (data) set({ loginUser: data });
     else set({ loginError: undefined });
@@ -76,7 +92,7 @@ const useStore = create<StoreType>((set, get) => ({
         "Content-Type": "application/json",
       },
       body: JSON.stringify(submitNewUser),
-    }).then((res) => res.json());
+    }).then(res => res.json());
 
     if (createdUser.Error) set({ loginError: "failToCreate" });
     else set({ loginUser: createdUser });
@@ -85,11 +101,11 @@ const useStore = create<StoreType>((set, get) => ({
   shops: [],
   fetchShops: () => {
     fetch("http://localhost:3000/shops/")
-      .then((res) => res.json())
-      .then((shopsList) => {
+      .then(res => res.json())
+      .then(shopsList => {
         fetch("http://localhost:3000/shops/estimateTime")
-          .then((res) => res.json())
-          .then((shopsEstimateTime) => {
+          .then(res => res.json())
+          .then(shopsEstimateTime => {
             const completeShopList = shopsList.map((shop: ShopType) => {
               for (const shopTime of shopsEstimateTime) {
                 if (shopTime.postcode === shop.postcode)
@@ -102,9 +118,16 @@ const useStore = create<StoreType>((set, get) => ({
   },
 
   cart: {},
-  addShopIdToCart: (id) => {
+  addShopIdToCart: id => {
     const currntCart = get().cart;
     set({ cart: { ...currntCart, shop_id: id } });
+  },
+
+  coffeeList: [],
+  fetchCoffeeList: () => {
+    fetch("http://localhost:3000/coffee")
+      .then(res => res.json())
+      .then(coffee => set({ coffeeList: coffee }));
   },
 }));
 
