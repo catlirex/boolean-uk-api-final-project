@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { APP_COLOR } from "../consistent";
 
-import useStore from "../store";
+import useStore, { ShopType } from "../store";
 
 const ShopCardDiv = styled.div`
   display: grid;
@@ -31,9 +31,13 @@ const ShopCardUl = styled.ul`
 export default function ShopCards() {
   const fetchShops = useStore((store) => store.fetchShops);
   const shops = useStore((store) => store.shops);
-  const cart = useStore((store) => store.cart);
   const addShopIdToCart = useStore((store) => store.addShopIdToCart);
   const history = useHistory();
+
+  function handleClick(shop: ShopType) {
+    addShopIdToCart(shop.id);
+    history.push("/user/coffeeList");
+  }
 
   useEffect(() => {
     fetchShops();
@@ -41,8 +45,12 @@ export default function ShopCards() {
 
   return (
     <ShopCardUl>
-      {shops.map((shop) => (
-        <ShopCardDiv className="shop" onClick={() => addShopIdToCart(shop.id)}>
+      {shops.map((shop, index) => (
+        <ShopCardDiv
+          key={index}
+          className="shop"
+          onClick={() => handleClick(shop)}
+        >
           <div className="shop-image">
             <img
               src={shop.image}
