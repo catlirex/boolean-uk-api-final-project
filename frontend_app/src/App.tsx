@@ -1,7 +1,10 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import "./App.css";
+import CoffeeDetailsPage from "./Pages/CoffeeDetailsPage";
+import CoffeeList from "./Pages/CoffeeListPage";
 import LoginPage from "./Pages/LoginPage";
+import ShopPage from "./Pages/ShopPage";
 import UserPage from "./Pages/UserPage";
 
 function App() {
@@ -18,7 +21,11 @@ function App() {
           </Route>
 
           <Route path="/shop/:id" exact>
-            {/* <ShopPage/> */}
+            <ShopPage />
+          </Route>
+
+          <Route path="/coffee">
+            <CoffeeList />
           </Route>
 
           <Route>

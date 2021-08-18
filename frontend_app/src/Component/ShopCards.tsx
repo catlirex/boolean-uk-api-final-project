@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { APP_COLOR } from "../consistent";
 
@@ -24,14 +25,19 @@ const ShopCardUl = styled.ul`
 `;
 
 export default function ShopCards() {
-  const fetchShops = useStore((store) => store.fetchShops);
+  const fetchShops = useStore(store => store.fetchShops);
 
-  const shops = useStore((store) => store.shops);
+  const shops = useStore(store => store.shops);
 
-  const cart = useStore((store) => store.cart);
-  console.log(cart);
+  const cart = useStore(store => store.cart);
 
-  const addShopIdToCart = useStore((store) => store.addShopIdToCart);
+  const addShopIdToCart = useStore(store => store.addShopIdToCart);
+
+  const history = useHistory();
+
+  if (cart.shop_id) {
+    history.push("/coffee");
+  }
 
   useEffect(() => {
     fetchShops();
@@ -39,8 +45,8 @@ export default function ShopCards() {
 
   return (
     <ShopCardUl>
-      {shops.map((shop) => (
-        <ShopCardDiv className="shop" onClick={(e) => addShopIdToCart(shop.id)}>
+      {shops.map(shop => (
+        <ShopCardDiv className="shop" onClick={() => addShopIdToCart(shop.id)}>
           <div className="shop-image">
             <img
               src={shop.image}
