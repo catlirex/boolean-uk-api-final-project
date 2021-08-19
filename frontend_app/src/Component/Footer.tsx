@@ -14,6 +14,9 @@ const StyledFooter = styled.footer`
   background-color: black;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
+  width: 296px;
+  position: fixed;
+  top: 623px;
 `;
 
 const useStyles = makeStyles((theme) => ({
@@ -55,7 +58,7 @@ export default function Footer() {
             <HomeIcon />
             Home
           </ColoredButton>
-          <ColoredButton onClick={() => history.push("/shop")}>
+          <ColoredButton onClick={() => history.push("/user/shopList")}>
             <ShoppingBasketIcon />
             Order Coffee
           </ColoredButton>

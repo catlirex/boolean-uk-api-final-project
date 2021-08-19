@@ -42,12 +42,27 @@ export type CoffeeType = {
   image: string;
 };
 
+type specialRequestType = {
+  id: Number;
+  request: String;
+  price: Number;
+  type: String;
+};
+
+type specialRequestsType = {
+  id: Number;
+  specialRequestId: Number;
+  coffeeOrderId: Number;
+  specialRequest: specialRequestType;
+};
+
 export type CoffeeOrderType = {
   id: Number;
   quantity: Number;
   transaction_id: Number;
   coffee_id: Number;
-  coffee?: CoffeeType;
+  coffee: CoffeeType;
+  specialRequests?: specialRequestsType[];
 };
 
 export type TransactionHistory = {
@@ -72,6 +87,7 @@ type StoreType = {
   loginUser: null | UserType;
   userTransactionHistory: TransactionHistory[];
   getUserTransactionHistory: () => void;
+  deleteTransaction: (id: Number) => void;
   setNewUser: (name: undefined | string, phone: string | null) => void;
   shops: ShopType[];
   fetchShops: () => void;
@@ -127,6 +143,19 @@ const useStore = create<StoreType>((set, get) => ({
       `http://localhost:3000/transactions/user/${userID}`
     ).then((res) => res.json());
     set({ userTransactionHistory: allTransaction });
+  },
+  deleteTransaction: async (id) => {
+    const deletedData = await fetch(
+      `http://localhost:3000/transactions/${id}`,
+      {
+        method: "DELETE",
+      }
+    ).then((res) => res.json());
+    set({
+      userTransactionHistory: get().userTransactionHistory.filter(
+        (target) => target.id === deletedData.id
+      ),
+    });
   },
 
   shops: [],

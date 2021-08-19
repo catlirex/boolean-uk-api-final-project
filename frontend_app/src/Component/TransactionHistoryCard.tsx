@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { APP_COLOR } from "../consistent";
 import useStore, { TransactionHistory, CoffeeOrderType } from "../store";
 import takeaway from "../assets/hot_coffee_icon.png";
+import { useHistory } from "react-router-dom";
 
 const HistoryLi = styled.li`
   background-color: ${APP_COLOR.wheat};
@@ -56,19 +57,17 @@ type Props = {
 
 export default function TransactionHistoryCard({ history }: Props) {
   const shopList = useStore((state) => state.shops);
-  const {
-    status,
-    estimated_pickup_time,
-    id,
-    shop_id,
-    transaction_time,
-    coffeeOrder,
-  } = history;
+  const browseHistory = useHistory();
+  const { id, status, estimated_pickup_time, shop_id, coffeeOrder } = history;
   const shopDetail = shopList.find((target) => target.id === shop_id);
   const pickUpTime = estimated_pickup_time.slice(11, 16);
 
+  function handleClick(e: React.SyntheticEvent) {
+    browseHistory.push(`/user/transactionRecord/${id}`);
+  }
+
   return (
-    <HistoryLi>
+    <HistoryLi onClick={(e) => handleClick(e)}>
       <div className="status-box">
         <span className="status">{status}</span>
         {status === "pending" ? <span>ReadyOn:{pickUpTime}</span> : null}

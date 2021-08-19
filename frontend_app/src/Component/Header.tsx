@@ -9,6 +9,9 @@ const StyledHeader = styled.header`
   grid-auto-flow: column;
   background-color: ${APP_COLOR.darkGray};
   align-items: center;
+  position: fixed;
+  top: 40px;
+  width: 300px;
   .header-logo {
     height: 60px;
     width: 60px;

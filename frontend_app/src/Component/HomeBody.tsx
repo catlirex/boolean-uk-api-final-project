@@ -69,12 +69,18 @@ export default function HomeBody() {
         <h1>Make your order</h1>
       </div>
 
-      <div className="view-order container">
+      <div
+        className="view-order container"
+        onClick={() => history.push("/user/transactionRecord")}
+      >
         <img className="coffee-img" src={brewCoffee} alt="coffee image" />
 
         <h2>View order Status</h2>
       </div>
-      <div className="reorder container">
+      <div
+        className="reorder container"
+        onClick={() => history.push("/user/transactionRecord")}
+      >
         <img className="coffee-img" src={takeaway} alt="coffee image" />
         <h2>One Click Reorder</h2>
       </div>
