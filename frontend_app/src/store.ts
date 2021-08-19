@@ -1,3 +1,4 @@
+import React from "react";
 import create from "zustand";
 
 export type UserType = {
@@ -97,23 +98,25 @@ type StoreType = {
   fetchCoffeeList: () => void;
   selectedCoffee: CoffeeType | null;
   setSelectedCoffee: (name: string) => void;
+  loginShopTodayTransaction: null;
+  setLoginShop: (e: React.SyntheticEvent) => void;
 };
 
 const useStore = create<StoreType>((set, get) => ({
   loginRole: null,
-  selectRole: role => {
+  selectRole: (role) => {
     if (get().loginRole === role) set({ loginRole: null });
     else set({ loginRole: role });
   },
   loginError: null,
   loginUser: null,
-  setLogInUser: async e => {
+  setLogInUser: async (e) => {
     const target = e.target as typeof e.target & {
       phone: { value: string };
     };
     const data = await fetch(
       `http://localhost:3000/users/${target.phone.value}`
-    ).then(res => res.json());
+    ).then((res) => res.json());
 
     if (data) set({ loginUser: data });
     else set({ loginError: undefined });
@@ -130,7 +133,7 @@ const useStore = create<StoreType>((set, get) => ({
         "Content-Type": "application/json",
       },
       body: JSON.stringify(submitNewUser),
-    }).then(res => res.json());
+    }).then((res) => res.json());
 
     if (createdUser.Error) set({ loginError: "failToCreate" });
     else set({ loginUser: createdUser });
@@ -161,11 +164,11 @@ const useStore = create<StoreType>((set, get) => ({
   shops: [],
   fetchShops: () => {
     fetch("http://localhost:3000/shops/")
-      .then(res => res.json())
-      .then(shopsList => {
+      .then((res) => res.json())
+      .then((shopsList) => {
         fetch("http://localhost:3000/shops/estimateTime")
-          .then(res => res.json())
-          .then(shopsEstimateTime => {
+          .then((res) => res.json())
+          .then((shopsEstimateTime) => {
             const completeShopList = shopsList.map((shop: ShopType) => {
               for (const shopTime of shopsEstimateTime) {
                 if (shopTime.postcode === shop.postcode)
@@ -178,7 +181,7 @@ const useStore = create<StoreType>((set, get) => ({
   },
 
   cart: null,
-  addShopIdToCart: id => {
+  addShopIdToCart: (id) => {
     set({ cart: { shop_id: id } });
 
     // const currntCart = get().cart;
@@ -188,17 +191,30 @@ const useStore = create<StoreType>((set, get) => ({
   coffeeList: [],
   fetchCoffeeList: () => {
     fetch("http://localhost:3000/coffee")
-      .then(res => res.json())
-      .then(coffee => set({ coffeeList: coffee }));
+      .then((res) => res.json())
+      .then((coffee) => set({ coffeeList: coffee }));
   },
 
   selectedCoffee: null,
-  setSelectedCoffee: coffeeName => {
+  setSelectedCoffee: (coffeeName) => {
     const fetchSelectedCoffee = (name: string) => {
       fetch(`http://localhost:3000/coffee/${name}`)
-        .then(res => res.json())
-        .then(coffee => set({ selectedCoffee: coffee }));
+        .then((res) => res.json())
+        .then((coffee) => set({ selectedCoffee: coffee }));
     };
+  },
+
+  loginShopTodayTransaction: null,
+  setLoginShop: async (e: React.SyntheticEvent) => {
+    const target = e.target as typeof e.target & {
+      postcode: { value: string };
+    };
+    const data = await fetch(
+      `http://localhost:3000/transactions/shop/${target.postcode.value}/today`
+    ).then((res) => res.json());
+
+    if (data) set({ loginShopTodayTransaction: data });
+    else set({ loginError: undefined });
   },
 }));
 
