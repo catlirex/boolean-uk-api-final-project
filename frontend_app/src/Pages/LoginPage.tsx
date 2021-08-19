@@ -43,7 +43,7 @@ export default function LoginPage() {
   const history = useHistory();
 
   useEffect(() => {
-    if (loginUser) history.push(`/user/${loginUser.id}`);
+    if (loginUser) history.push(`/user`);
     else return;
   }, [loginUser]);
 

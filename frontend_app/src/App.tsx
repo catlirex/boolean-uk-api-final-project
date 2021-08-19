@@ -38,7 +38,7 @@ function App() {
             <TransactionDetailPage />
           </Route>
 
-          <Route path="/user/:id">
+          <Route path="/user">
             <UserPage />
           </Route>
 

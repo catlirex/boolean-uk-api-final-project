@@ -39,7 +39,7 @@ export default function CoffeeOrderCard({ order }: Props) {
 
         {specialRequests?.length
           ? specialRequests.map((request) => (
-              <p>
+              <p key={request.id}>
                 {request.specialRequest.request} {request.specialRequest.type}
               </p>
             ))

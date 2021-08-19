@@ -65,6 +65,7 @@ const StyledSection = styled.section`
 export default function TransactionDetailPage() {
   const { id } = useParams<Params>();
   const history = useHistory();
+  const [totalPrice, setTotalPrice] = useState(0);
   const [fullDetailHistory, setFullDetailHistory] =
     useState<TransactionHistory | null>(null);
   const deleteTransaction = useStore((state) => state.deleteTransaction);
@@ -80,20 +81,25 @@ export default function TransactionDetailPage() {
   const shopDetail = shopList.find(
     (target) => target.id === fullDetailHistory?.shop_id
   );
-  const pricePreCoffeeOrder = fullDetailHistory?.coffeeOrder?.map(
-    (order: CoffeeOrderType) => {
-      if (!order.specialRequests?.length)
-        return order.quantity * order.coffee.price;
-      else {
-        let price = 0;
-        for (const request of order.specialRequests) {
-          price += request.specialRequest.price * order.quantity;
+
+  useEffect(() => {
+    if (!fullDetailHistory) return;
+    const pricePreCoffeeOrder = fullDetailHistory?.coffeeOrder?.map(
+      (order: CoffeeOrderType) => {
+        if (!order.specialRequests?.length)
+          return order.quantity * order.coffee.price;
+        else {
+          let price = 0;
+          for (const request of order.specialRequests) {
+            price += request.specialRequest.price * order.quantity;
+          }
+          return order.quantity * order.coffee.price + price;
         }
-        return order.quantity * order.coffee.price + price;
       }
-    }
-  );
-  const totalPrice = pricePreCoffeeOrder?.reduce((a, b) => a + b);
+    );
+    if (pricePreCoffeeOrder?.length)
+      setTotalPrice(pricePreCoffeeOrder.reduce((a, b) => a + b));
+  }, [fullDetailHistory]);
 
   const handleClick = async (e: React.SyntheticEvent) => {
     if (fullDetailHistory) {
@@ -105,7 +111,7 @@ export default function TransactionDetailPage() {
   return (
     <StyledPage>
       <Header />
-      {fullDetailHistory ? (
+      {fullDetailHistory && totalPrice ? (
         <StyledSection>
           <div className="status-box">
             <span className="status">{fullDetailHistory.status}</span>
