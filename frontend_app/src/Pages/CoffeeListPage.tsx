@@ -9,9 +9,8 @@ import Header from "../Component/Header";
 import Footer from "../Component/Footer";
 
 const StyledCoffeeListPage = styled.div`
-  display: grid;
-  height: 100%;
-  grid-template-rows: 80px 1fr 50px;
+  height: 84%;
+  margin-top: 50px;
 `;
 
 export default function CoffeeList() {

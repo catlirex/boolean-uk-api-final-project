@@ -26,6 +26,10 @@ const ShopCardUl = styled.ul`
   gap: 10px;
   grid-auto-rows: max-content;
   padding: 0.5rem;
+
+  overflow-y: scroll;
+  overflow-style: none;
+  scroll-behavior: smooth;
 `;
 
 export default function ShopCards() {
