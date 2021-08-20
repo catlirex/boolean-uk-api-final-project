@@ -31,7 +31,6 @@ type CoffeeTypeInCart = {
 
 type SpecialRequestTypeInCart = {
   specialRequestId: number;
-
 };
 
 export type CoffeeType = {
@@ -98,8 +97,6 @@ type StoreType = {
   fetchShops: () => void;
   cart: CartType | null;
 
-
-  
   setCart: (arg1: CartType) => void;
   completeTransaction: () => void;
 
@@ -121,19 +118,19 @@ type StoreType = {
 
 const useStore = create<StoreType>((set, get) => ({
   loginRole: null,
-  selectRole: (role) => {
+  selectRole: role => {
     if (get().loginRole === role) set({ loginRole: null });
     else set({ loginRole: role });
   },
   loginError: null,
   loginUser: null,
-  setLogInUser: async (e) => {
+  setLogInUser: async e => {
     const target = e.target as typeof e.target & {
       phone: { value: string };
     };
     const data = await fetch(
       `http://localhost:3000/users/${target.phone.value}`
-    ).then((res) => res.json());
+    ).then(res => res.json());
 
     if (data.id) set({ loginUser: data });
     else set({ loginError: undefined });
@@ -150,9 +147,9 @@ const useStore = create<StoreType>((set, get) => ({
         "Content-Type": "application/json",
       },
       body: JSON.stringify(submitNewUser),
-    }).then((res) => res.json());
+    }).then(res => res.json());
 
-    if (createdUser.Error) set({ loginError: "failToCreate" });
+    if (!createdUser.id) set({ loginError: "failToCreate" });
     else set({ loginUser: createdUser });
   },
 
@@ -164,16 +161,16 @@ const useStore = create<StoreType>((set, get) => ({
     ).then(res => res.json());
     set({ userTransactionHistory: allTransaction });
   },
-  deleteTransaction: async (id) => {
+  deleteTransaction: async id => {
     const deletedData = await fetch(
       `http://localhost:3000/transactions/${id}`,
       {
         method: "DELETE",
       }
-    ).then((res) => res.json());
+    ).then(res => res.json());
     set({
       userTransactionHistory: get().userTransactionHistory.filter(
-        (target) => target.id === deletedData.id
+        target => target.id === deletedData.id
       ),
     });
   },
@@ -181,11 +178,11 @@ const useStore = create<StoreType>((set, get) => ({
   shops: [],
   fetchShops: () => {
     fetch("http://localhost:3000/shops/")
-      .then((res) => res.json())
-      .then((shopsList) => {
+      .then(res => res.json())
+      .then(shopsList => {
         fetch("http://localhost:3000/shops/estimateTime")
-          .then((res) => res.json())
-          .then((shopsEstimateTime) => {
+          .then(res => res.json())
+          .then(shopsEstimateTime => {
             const completeShopList = shopsList.map((shop: ShopType) => {
               for (const shopTime of shopsEstimateTime) {
                 if (shopTime.postcode === shop.postcode)
@@ -198,7 +195,7 @@ const useStore = create<StoreType>((set, get) => ({
   },
 
   cart: null,
-  addShopIdToCart: (id) => {
+  addShopIdToCart: (id: number) => {
     set({ cart: { shop_id: id } });
   },
   setCart: newCart => {
@@ -218,8 +215,8 @@ const useStore = create<StoreType>((set, get) => ({
   coffeeList: [],
   fetchCoffeeList: () => {
     fetch("http://localhost:3000/coffee")
-      .then((res) => res.json())
-      .then((coffee) => set({ coffeeList: coffee }));
+      .then(res => res.json())
+      .then(coffee => set({ coffeeList: coffee }));
   },
 
   selectedCoffee: null,
@@ -238,8 +235,7 @@ const useStore = create<StoreType>((set, get) => ({
     fetch("http://localhost:3000/specialRequests")
       .then(res => res.json())
       .then(request => set({ specialRequest: request }));
-
-  
+  },
 
   loginShopTodayTransaction: null,
   setLoginShop: async (e: React.SyntheticEvent) => {
@@ -248,11 +244,10 @@ const useStore = create<StoreType>((set, get) => ({
     };
     const data = await fetch(
       `http://localhost:3000/transactions/shop/${target.postcode.value}/today`
-    ).then((res) => res.json());
+    ).then(res => res.json());
 
     if (data.length) set({ loginShopTodayTransaction: data });
     else set({ loginError: undefined });
-
   },
   updateStatus: async (id, status) => {
     const updatedTransaction = await fetch(
@@ -264,8 +259,8 @@ const useStore = create<StoreType>((set, get) => ({
         },
         body: JSON.stringify({ status }),
       }
-    ).then((res) => res.json());
-    let updatedArray = get().loginShopTodayTransaction?.map((target) => {
+    ).then(res => res.json());
+    let updatedArray = get().loginShopTodayTransaction?.map(target => {
       if (target.id === updatedTransaction.id)
         return { ...target, ...updatedTransaction };
       else return target;
@@ -273,7 +268,7 @@ const useStore = create<StoreType>((set, get) => ({
     if (updatedArray) set({ loginShopTodayTransaction: updatedArray });
   },
   orderFilter: "pending",
-  setOrderFilter: (filter) => {
+  setOrderFilter: filter => {
     set({ orderFilter: filter });
   },
 }));

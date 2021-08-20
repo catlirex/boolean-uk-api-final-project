@@ -22,11 +22,11 @@ const ShopPageUl = styled.ul`
 `;
 
 export default function ShopHomeBody() {
-  const loginError = useStore((state) => state.loginError);
+  const loginError = useStore(state => state.loginError);
   const loginShopTodayTransaction = useStore(
-    (state) => state.loginShopTodayTransaction
+    state => state.loginShopTodayTransaction
   );
-  const orderFilter = useStore((state) => state.orderFilter);
+  const orderFilter = useStore(state => state.orderFilter);
   const [toRenderOrder, setToRenderOrder] = useState(loginShopTodayTransaction);
   const history = useHistory();
   console.log(orderFilter);
@@ -34,23 +34,23 @@ export default function ShopHomeBody() {
   useEffect(() => {
     if (loginError === null && !loginShopTodayTransaction) history.push("/");
     if (!loginShopTodayTransaction) return;
+
     if (orderFilter === "pending") {
       const filteredOrder = loginShopTodayTransaction?.filter(
-        (target) => target.status === orderFilter
+        target => target.status === orderFilter
       );
       setToRenderOrder(filteredOrder);
     } else if (orderFilter === "urgent") {
       const filteredOrder = loginShopTodayTransaction?.filter(
-        (target) =>
-          new Date(target.estimated_pickup_time).getTime() < Date.now()
+        target => new Date(target.estimated_pickup_time).getTime() < Date.now()
       );
       setToRenderOrder(filteredOrder);
     } else {
       const completeOrders = loginShopTodayTransaction?.filter(
-        (target) => target.status === "collected"
+        target => target.status === "collected"
       );
       const allOtherOrders = loginShopTodayTransaction?.filter(
-        (target) => target.status !== "collected"
+        target => target.status !== "collected"
       );
       const sortedArray = [...allOtherOrders, ...completeOrders];
       setToRenderOrder(sortedArray);
