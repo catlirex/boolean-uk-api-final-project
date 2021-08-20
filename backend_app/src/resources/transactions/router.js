@@ -9,7 +9,7 @@ const {
   deleteTrascaction,
 } = require("./controller");
 
-router.get("/shop/:shopId/today", todaysTransactionsForOneShop);
+router.get("/shop/:postcode/today", todaysTransactionsForOneShop);
 
 router.get("/user/:userId", getAllTransactionsForOneUser);
 

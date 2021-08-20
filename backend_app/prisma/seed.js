@@ -15,35 +15,35 @@ const getRandomElement = (array) => {
 };
 
 async function seed() {
-  // const createdCoffeeList = [];
+  const createdCoffeeList = [];
 
-  // for (coffeeData of coffeeList) {
-  //   const createdCoffee = await prisma.coffee.create({
-  //     data: coffeeData,
-  //   });
-  //   console.log(createdCoffee);
-  //   createdCoffeeList.push(createdCoffee);
-  // }
+  for (coffeeData of coffeeList) {
+    const createdCoffee = await prisma.coffee.create({
+      data: coffeeData,
+    });
+    console.log(createdCoffee);
+    createdCoffeeList.push(createdCoffee);
+  }
 
-  // const createdSpecialRequestList = [];
-  // for (const specialRequest of specialRequestList) {
-  //   const createdRequest = await prisma.specialRequest.create({
-  //     data: specialRequest,
-  //   });
+  const createdSpecialRequestList = [];
+  for (const specialRequest of specialRequestList) {
+    const createdRequest = await prisma.specialRequest.create({
+      data: specialRequest,
+    });
 
-  //   console.log(createdRequest);
-  //   createdSpecialRequestList.push(createdRequest);
-  // }
+    console.log(createdRequest);
+    createdSpecialRequestList.push(createdRequest);
+  }
 
-  // const createdShopList = [];
-  // for (const shopData of shopList) {
-  //   const createdShop = await prisma.shop.create({
-  //     data: shopData,
-  //   });
+  const createdShopList = [];
+  for (const shopData of shopList) {
+    const createdShop = await prisma.shop.create({
+      data: shopData,
+    });
 
-  //   console.log(createdShop);
-  //   createdShopList.push(createdShop);
-  // }
+    console.log(createdShop);
+    createdShopList.push(createdShop);
+  }
 
   const usersList = buildUserList();
   const createdUsersList = [];
@@ -61,7 +61,7 @@ async function seed() {
     let transactionList = buildTransactionsList();
     for (const oneTransaction of transactionList) {
       oneTransaction.user_id = user.id;
-      oneTransaction.shop_id = getRandomInt(1, 2);
+      oneTransaction.shop_id = getRandomInt(1, 3);
       const createdTransaction = await prisma.transaction.create({
         data: oneTransaction,
       });

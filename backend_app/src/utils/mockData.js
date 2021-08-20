@@ -5,7 +5,7 @@ function getRandomInt(min, max) {
 }
 
 function buildUserList() {
-  const numOfUser = getRandomInt(3, 5);
+  const numOfUser = getRandomInt(10, 30);
   const users = [];
   for (let i = 0; i < numOfUser; i++) {
     let user = {
@@ -20,7 +20,7 @@ function buildUserList() {
 }
 
 function buildTransactionsList() {
-  const numOfTransactions = getRandomInt(1, 3);
+  const numOfTransactions = getRandomInt(3, 5);
   const transactions = [];
   for (let i = 0; i < numOfTransactions; i++) {
     let transaction = {
@@ -239,26 +239,6 @@ const coffeeList = [
     price: 4,
     image:
       "https://laboratorioespresso.it/wp-content/uploads/2018/05/caffe-marocchino-710x448-1.jpg",
-    ice: false,
-  },
-  {
-    name: "Bicerin",
-    description:
-      "It is a traditional warm coffee concoction native to Turin, Italy, made of espresso, drinking chocolate and whole milk served layered in a small rounded glass.",
-    size: "Large",
-    price: 4.5,
-    image:
-      "https://lh3.googleusercontent.com/proxy/Qu_KtPXL0n67a1cxMN1ZUIukX6WEvx6Z0An7v-d-Fg85MywYfN9OYNthprmvmhSIRDAid7xH68BHsbbnLcTb5CGETlSqAmqeJrEoVScz3U_qcPEk50FE3xWVcbANHBZOYXoLFbkk2ITwuw",
-    ice: false,
-  },
-  {
-    name: "Bicerin",
-    description:
-      "It is a traditional warm coffee concoction native to Turin, Italy, made of espresso, drinking chocolate and whole milk served layered in a small rounded glass.",
-    size: "Regular",
-    price: 3.5,
-    image:
-      "https://lh3.googleusercontent.com/proxy/Qu_KtPXL0n67a1cxMN1ZUIukX6WEvx6Z0An7v-d-Fg85MywYfN9OYNthprmvmhSIRDAid7xH68BHsbbnLcTb5CGETlSqAmqeJrEoVScz3U_qcPEk50FE3xWVcbANHBZOYXoLFbkk2ITwuw",
     ice: false,
   },
   {
@@ -482,7 +462,7 @@ const specialRequestList = [
   },
   {
     type: "shot",
-    request: "Normal",
+    request: "One",
     price: 0,
   },
   {
@@ -502,18 +482,13 @@ const specialRequestList = [
   },
   {
     type: "syrups",
-    request: "Hazelnul",
+    request: "Hazelnut",
     price: 0.5,
   },
   {
     type: "syrups",
     request: "Vanilla",
     price: 0.5,
-  },
-  {
-    type: "ice",
-    request: "Extra",
-    price: 3,
   },
   {
     type: "ice",
@@ -524,6 +499,11 @@ const specialRequestList = [
     type: "ice",
     request: "Normal",
     price: 0,
+  },
+  {
+    type: "ice",
+    request: "Extra",
+    price: 3,
   },
 ];
 

@@ -5,7 +5,7 @@ import Header from "../Component/Header";
 import Footer from "../Component/Footer";
 
 import styled from "styled-components";
-import ShopCards from "../Component/ShopCards";
+import ShopCards from "../Component/ShopComponent/ShopCards";
 import useStore from "../store";
 
 const ShopPageDiv = styled.div`

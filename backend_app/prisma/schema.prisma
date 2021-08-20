@@ -75,7 +75,7 @@ model SpecialRequest_CoffeeOrder {
 
 enum Status {
   pending
-  procressing
+  processing
   ready
   collected
 }

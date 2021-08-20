@@ -70,7 +70,9 @@ export default function TransactionHistoryCard({ history }: Props) {
     <HistoryLi onClick={(e) => handleClick(e)}>
       <div className="status-box">
         <span className="status">{status}</span>
-        {status === "pending" ? <span>ReadyOn:{pickUpTime}</span> : null}
+        {status === "pending" || status === "processing" ? (
+          <span>ReadyOn:{pickUpTime}</span>
+        ) : null}
       </div>
       <div className="info">
         <div>

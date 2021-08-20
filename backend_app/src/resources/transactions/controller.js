@@ -46,16 +46,17 @@ const todaysDate = () => {
 };
 
 const todaysTransactionsForOneShop = async (req, res) => {
-  const id = Number(req.params.shopId);
+  const postcode = req.params.postcode;
   const today = todaysDate();
   try {
     const result = await transaction.findMany({
       where: {
-        shop: { id },
+        shop: { postcode },
         transaction_time: {
           gte: new Date(today),
         },
       },
+      include: { coffeeOrder: { include: { coffee: true } } },
     });
 
     if (result) res.json(result);

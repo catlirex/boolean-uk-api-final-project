@@ -9,6 +9,7 @@ import UserPage from "./Pages/UserPage";
 import TransactionListPage from "./Pages/TransactionListPage";
 import TransactionDetailPage from "./Pages/TransactionDetailPage";
 import ShopHomePage from "./Pages/ShopHomePage";
+import ShopOrderDetailPage from "./Pages/ShopOrderDetailPage";
 
 function App() {
   return (
@@ -39,12 +40,16 @@ function App() {
             <TransactionDetailPage />
           </Route>
 
-          <Route path="/user">
+          <Route path="/user" exact>
             <UserPage />
           </Route>
 
-          <Route path="/shop">
+          <Route path="/shop" exact>
             <ShopHomePage />
+          </Route>
+
+          <Route path="/shop/order/:id">
+            <ShopOrderDetailPage />
           </Route>
 
           <Route>
