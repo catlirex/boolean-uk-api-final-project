@@ -2,9 +2,9 @@ import React from "react";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { APP_COLOR } from "../consistent";
+import { APP_COLOR } from "../../consistent";
 
-import useStore, { ShopType } from "../store";
+import useStore, { ShopType } from "../../store";
 
 const ShopCardDiv = styled.div`
   display: grid;
@@ -33,9 +33,9 @@ const ShopCardUl = styled.ul`
 `;
 
 export default function ShopCards() {
-  const fetchShops = useStore(store => store.fetchShops);
-  const shops = useStore(store => store.shops);
-  const addShopIdToCart = useStore(store => store.addShopIdToCart);
+  const fetchShops = useStore((store) => store.fetchShops);
+  const shops = useStore((store) => store.shops);
+  const addShopIdToCart = useStore((store) => store.addShopIdToCart);
   const history = useHistory();
 
   function handleClick(shop: ShopType) {

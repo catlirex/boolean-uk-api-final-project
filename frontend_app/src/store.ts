@@ -2,77 +2,77 @@ import React from "react";
 import create from "zustand";
 
 export type UserType = {
-  id: Number;
+  id: number;
   name: string;
-  phone_number: Number;
+  phone_number: number;
 };
 
 export type ShopType = {
-  id: Number;
+  id: number;
   name: string;
   image: string;
   postcode: string;
-  estimateTime: Number;
-  pendingCupOfCoffee: Number;
+  estimateTime: number;
+  pendingCupOfCoffee: number;
 };
 
 type CartType = {
-  estimateTime?: Number;
-  userId?: Number;
-  shop_id?: Number;
+  estimateTime?: number;
+  userId?: number;
+  shop_id?: number;
   coffee?: CoffeeTypeInCart;
 };
 
 type CoffeeTypeInCart = {
-  quantity: Number;
-  coffeeId: Number;
+  quantity: number;
+  coffeeId: number;
   specialRequest: SpecialRequestTypeInCart;
 };
 
 type SpecialRequestTypeInCart = {
-  specialRequestId: Number;
+  specialRequestId: number;
 };
 
 export type CoffeeType = {
-  id: Number;
+  id: number;
   name: string;
-  size: Number;
-  price: Number;
+  size: number;
+  price: number;
   description: string;
   ice: boolean;
   image: string;
 };
 
 type specialRequestType = {
-  id: Number;
-  request: String;
-  price: Number;
-  type: String;
+  id: number;
+  request: string;
+  price: number;
+  type: string;
 };
 
 type specialRequestsType = {
-  id: Number;
-  specialRequestId: Number;
-  coffeeOrderId: Number;
+  id: number;
+  specialRequestId: number;
+  coffeeOrderId: number;
   specialRequest: specialRequestType;
 };
 
 export type CoffeeOrderType = {
-  id: Number;
-  quantity: Number;
-  transaction_id: Number;
-  coffee_id: Number;
+  id: number;
+  quantity: number;
+  transaction_id: number;
+  coffee_id: number;
   coffee: CoffeeType;
   specialRequests?: specialRequestsType[];
 };
 
 export type TransactionHistory = {
   estimated_pickup_time: string;
-  id: Number;
-  shop_id: Number;
-  status: String;
-  transaction_time: String;
-  user_id: Number;
+  id: number;
+  shop_id: number;
+  status: string;
+  transaction_time: string;
+  user_id: number;
   coffeeOrder?: CoffeeOrderType[];
 };
 
@@ -88,18 +88,21 @@ type StoreType = {
   loginUser: null | UserType;
   userTransactionHistory: TransactionHistory[];
   getUserTransactionHistory: () => void;
-  deleteTransaction: (id: Number) => void;
+  deleteTransaction: (id: number) => void;
   setNewUser: (name: undefined | string, phone: string | null) => void;
   shops: ShopType[];
   fetchShops: () => void;
   cart: CartType | null;
-  addShopIdToCart: (id: Number) => void;
+  addShopIdToCart: (id: number) => void;
   coffeeList: CoffeeType[] | [];
   fetchCoffeeList: () => void;
   selectedCoffee: CoffeeType | null;
   setSelectedCoffee: (name: string) => void;
-  loginShopTodayTransaction: null;
+  loginShopTodayTransaction: null | TransactionHistory[];
   setLoginShop: (e: React.SyntheticEvent) => void;
+  updateStatus: (id: number, status: string) => void;
+  orderFilter: string;
+  setOrderFilter: (filter: string) => void;
 };
 
 const useStore = create<StoreType>((set, get) => ({
@@ -118,7 +121,7 @@ const useStore = create<StoreType>((set, get) => ({
       `http://localhost:3000/users/${target.phone.value}`
     ).then((res) => res.json());
 
-    if (data) set({ loginUser: data });
+    if (data.id) set({ loginUser: data });
     else set({ loginError: undefined });
   },
   setNewUser: async (name, phone) => {
@@ -213,8 +216,30 @@ const useStore = create<StoreType>((set, get) => ({
       `http://localhost:3000/transactions/shop/${target.postcode.value}/today`
     ).then((res) => res.json());
 
-    if (data) set({ loginShopTodayTransaction: data });
+    if (data.length) set({ loginShopTodayTransaction: data });
     else set({ loginError: undefined });
+  },
+  updateStatus: async (id, status) => {
+    const updatedTransaction = await fetch(
+      `http://localhost:3000/transactions/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status }),
+      }
+    ).then((res) => res.json());
+    let updatedArray = get().loginShopTodayTransaction?.map((target) => {
+      if (target.id === updatedTransaction.id)
+        return { ...target, ...updatedTransaction };
+      else return target;
+    });
+    if (updatedArray) set({ loginShopTodayTransaction: updatedArray });
+  },
+  orderFilter: "pending",
+  setOrderFilter: (filter) => {
+    set({ orderFilter: filter });
   },
 }));
 

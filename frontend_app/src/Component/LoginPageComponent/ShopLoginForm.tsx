@@ -41,8 +41,8 @@ export default function ShopLoginForm() {
   const history = useHistory();
 
   useEffect(() => {
-    if (loginShopTodayTransaction) history.push("/shop");
-  }, [loginShopTodayTransaction]);
+    if (loginShopTodayTransaction?.length) history.push("/shop");
+  }, [loginShopTodayTransaction, loginError]);
 
   function handleLogin(e: React.SyntheticEvent) {
     e.preventDefault();
