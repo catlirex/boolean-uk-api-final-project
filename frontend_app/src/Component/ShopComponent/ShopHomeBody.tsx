@@ -40,19 +40,31 @@ export default function ShopHomeBody() {
       );
       setToRenderOrder(filteredOrder);
     } else if (orderFilter === "urgent") {
-      const filteredOrder = loginShopTodayTransaction?.filter(
+      let filteredOrder = loginShopTodayTransaction?.filter(
         (target) =>
           new Date(target.estimated_pickup_time).getTime() < Date.now()
+      );
+      filteredOrder = filteredOrder.filter(
+        (target) =>
+          target.status === "pending" || target.status === "processing"
       );
       setToRenderOrder(filteredOrder);
     } else {
       const completeOrders = loginShopTodayTransaction?.filter(
         (target) => target.status === "collected"
       );
-      const allOtherOrders = loginShopTodayTransaction?.filter(
-        (target) => target.status !== "collected"
+      const readyOrders = loginShopTodayTransaction?.filter(
+        (target) => target.status === "ready"
       );
-      const sortedArray = [...allOtherOrders, ...completeOrders];
+
+      const allOtherOrders = loginShopTodayTransaction?.filter(
+        (target) => target.status !== "collected" && target.status !== "ready"
+      );
+      const sortedArray = [
+        ...readyOrders,
+        ...allOtherOrders,
+        ...completeOrders,
+      ];
       setToRenderOrder(sortedArray);
     }
   }, [loginShopTodayTransaction, loginError, orderFilter]);
