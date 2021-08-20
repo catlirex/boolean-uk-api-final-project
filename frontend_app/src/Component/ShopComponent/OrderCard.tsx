@@ -63,7 +63,9 @@ export default function OrderCard({ order }: Props) {
 
   const handleClick = (e: React.SyntheticEvent) => {
     e.stopPropagation();
-    updateStatus(id, "processing").then(history.push(`/shop/order/${id}`));
+    updateStatus(id, "processing").then(() =>
+      history.push(`/shop/order/${id}`)
+    );
   };
 
   return (

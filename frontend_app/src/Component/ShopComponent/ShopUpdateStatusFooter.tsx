@@ -85,7 +85,8 @@ export default function ShopUpdateStatusFooter({
 
   const handleClick = (status: string) => {
     updateStatus(parseInt(id), status);
-    setFullDetailHistory({ ...fullDetailHistory, status });
+    if (fullDetailHistory)
+      setFullDetailHistory({ ...fullDetailHistory, status });
   };
 
   return (
