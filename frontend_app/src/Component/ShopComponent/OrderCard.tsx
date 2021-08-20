@@ -18,7 +18,7 @@ const HistoryLi = styled.li`
   display: grid;
   grid-template-rows: 40px auto;
   gap: 5px;
-  color: ${APP_COLOR.white};
+  color: ${APP_COLOR.darkGray};
 
   .status-box {
     color: ${APP_COLOR.darkGray};
@@ -39,6 +39,11 @@ const HistoryLi = styled.li`
     padding: 5px;
     display: grid;
     grid-template-columns: 1fr 80px;
+  }
+  .id {
+    font-size: 1.1rem;
+    padding-bottom: 5px;
+    font-weight: 800;
   }
 `;
 
@@ -77,6 +82,10 @@ export default function OrderCard({ order }: Props) {
         new Date(estimated_pickup_time).getTime() < Date.now() &&
         (status === "pending" || status === "processing")
           ? APP_COLOR.paleRed
+          : status === "ready"
+          ? "#FFFF99"
+          : status === "collected"
+          ? "#AAFF80"
           : APP_COLOR.wheat
       }
     >
@@ -88,7 +97,7 @@ export default function OrderCard({ order }: Props) {
       </div>
       <div className="info-container">
         <div>
-          <p>Transaction ID: {id}</p>
+          <p className="id">Transaction ID: {id}</p>
           {coffeeOrder?.map((oneCoffee: CoffeeOrderType, index) => (
             <p key={index}>
               {" "}
