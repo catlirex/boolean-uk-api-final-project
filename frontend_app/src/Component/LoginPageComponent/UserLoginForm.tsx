@@ -31,10 +31,10 @@ const UserForm = styled.form`
 `;
 
 export default function UserLoginForm() {
-  const setLogInUser = useStore((state) => state.setLogInUser);
-  const setNewUser = useStore((state) => state.setNewUser);
-  const loginUser = useStore((state) => state.loginUser);
-  const loginError = useStore((state) => state.loginError);
+  const setLogInUser = useStore(state => state.setLogInUser);
+  const setNewUser = useStore(state => state.setNewUser);
+  const loginUser = useStore(state => state.loginUser);
+  const loginError = useStore(state => state.loginError);
   const [phone, setPhone] = useState<null | string>(null);
   const [name, setName] = useState(undefined);
 
@@ -49,7 +49,7 @@ export default function UserLoginForm() {
   }
 
   return (
-    <UserForm onSubmit={(e) => handleLogin(e)}>
+    <UserForm onSubmit={e => handleLogin(e)}>
       <div className="tagline">
         <h1>We brew for you</h1>
         {loginError === undefined ? (
@@ -87,7 +87,7 @@ export default function UserLoginForm() {
           const target = e.target as typeof e.target & {
             value: string;
           };
-          setPhone(target.value);
+          setName(target.value);
         }}
         error={false}
       />
@@ -98,7 +98,7 @@ export default function UserLoginForm() {
         variant="contained"
         color="primary"
         type="button"
-        onClick={(e) => handleNewUser(e)}
+        onClick={e => handleNewUser(e)}
       >
         Register New User
       </BlackButton>

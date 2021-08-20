@@ -69,6 +69,7 @@ const todaysTransactionsForOneShop = async (req, res) => {
 
 const createTransaction = async (req, res) => {
   const { coffee_orders, ...newTransaction } = req.body;
+  console.log(req.body);
 
   try {
     const createdTransaction = await transaction.create({
