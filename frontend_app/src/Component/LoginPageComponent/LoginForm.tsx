@@ -62,7 +62,7 @@ TxtRotate.prototype.tick = function () {
 };
 
 export default function LoginForm() {
-  const loginRole = useStore((state) => state.loginRole);
+  const loginRole = useStore(state => state.loginRole);
 
   useEffect(() => {
     if (!loginRole) {
@@ -112,7 +112,7 @@ export default function LoginForm() {
           <span
             className="txt-rotate"
             data-period="1000"
-            data-rotate='[ " sweet as angel:)", " black as devil"," HOT AS YOU ♥ ♥ ♥ ♥ " ]'
+            data-rotate='[ " sweet as an angel:)", " black as a devil 😈😈😈"," HOT AS YOU ♥ ♥ ♥ ♥ " ]'
           ></span>
         </h1>
       </AnimationDiv>
