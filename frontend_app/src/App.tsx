@@ -7,6 +7,8 @@ import LoginPage from "./Pages/LoginPage";
 import ShopPage from "./Pages/ShopPage";
 import UserPage from "./Pages/UserPage";
 import TransactionListPage from "./Pages/TransactionListPage";
+import TransactionDetailPage from "./Pages/TransactionDetailPage";
+import ShopHomePage from "./Pages/ShopHomePage";
 
 function App() {
   return (
@@ -33,12 +35,16 @@ function App() {
             <TransactionListPage />
           </Route>
 
-          <Route path="/user/:id">
+          <Route path="/user/transactionRecord/:id">
+            <TransactionDetailPage />
+          </Route>
+
+          <Route path="/user">
             <UserPage />
           </Route>
 
-          <Route path="/user/:id">
-            <UserPage />
+          <Route path="/shop">
+            <ShopHomePage />
           </Route>
 
           <Route>

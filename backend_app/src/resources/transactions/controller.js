@@ -9,7 +9,7 @@ const getTransactionDetailsById = async (req, res) => {
         coffeeOrder: {
           include: {
             specialRequests: { include: { specialRequest: true } },
-            coffee: { select: { name: true, size: true } },
+            coffee: true,
           },
         },
       },

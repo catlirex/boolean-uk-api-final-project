@@ -9,9 +9,8 @@ import ShopCards from "../Component/ShopCards";
 import useStore from "../store";
 
 const ShopPageDiv = styled.div`
-  display: grid;
-  height: 100%;
-  grid-template-rows: 80px 1fr 50px;
+  height: 84%;
+  margin-top: 50px;
 `;
 
 export default function ShopPage() {

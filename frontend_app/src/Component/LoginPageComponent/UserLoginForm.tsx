@@ -1,5 +1,5 @@
 import { TextField, Button, withStyles } from "@material-ui/core";
-import React, { useEffect } from "react";
+import React from "react";
 import { APP_COLOR } from "../../consistent";
 import styled from "styled-components";
 import useStore from "../../store";
@@ -68,7 +68,12 @@ export default function UserLoginForm() {
         defaultValue=""
         variant="outlined"
         error={false}
-        onChange={(e: React.SyntheticEvent) => setPhone(e.target.value)}
+        onChange={(e: React.SyntheticEvent) => {
+          const target = e.target as typeof e.target & {
+            value: string;
+          };
+          setPhone(target.value);
+        }}
         required
       />
       <TextField
@@ -78,7 +83,12 @@ export default function UserLoginForm() {
         autoComplete="off"
         defaultValue=""
         variant="outlined"
-        onChange={(e: React.SyntheticEvent) => setName(e.target.value)}
+        onChange={(e: React.SyntheticEvent) => {
+          const target = e.target as typeof e.target & {
+            value: string;
+          };
+          setPhone(target.value);
+        }}
         error={false}
       />
       <BlackButton variant="contained" color="primary" type="submit">

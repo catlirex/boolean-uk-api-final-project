@@ -40,7 +40,7 @@ const CoffeeLIstUl = styled.ul`
   align-items: center;
   gap: 5px;
   grid-template-columns: 1fr 1fr;
-
+  padding-bottom: 20px;
   height: 100%;
 
   overflow-y: scroll;
