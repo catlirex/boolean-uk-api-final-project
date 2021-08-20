@@ -11,6 +11,8 @@ const ShotDivEl = styled.div`
 
   text-align: center;
 
+  gap: 5px;
+
   padding: 0.5rem;
 
   input[type="radio"].shot {
@@ -75,9 +77,9 @@ export default function SelectShot() {
   );
 
   return (
-    <ShotDivEl onChange={e => handleClick(e)}>
-      {shotOptions?.map(option => (
-        <>
+    <ShotDivEl onChange={e => handleClick(e)} className="shot-options">
+      {shotOptions?.map((option, index) => (
+        <div key={index}>
           <input
             id={option.request.toString()}
             required
@@ -89,7 +91,7 @@ export default function SelectShot() {
           <label htmlFor={option.request.toString()}>
             {option.request} +${option.price}
           </label>
-        </>
+        </div>
       ))}
     </ShotDivEl>
   );

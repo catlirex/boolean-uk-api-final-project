@@ -43,12 +43,17 @@ export default function QuantityComponent() {
         name="quantity"
         className="quantity"
         value={count}
+        onChange={(e: React.SyntheticEvent) => {
+          const target = e.target as typeof e.target & {
+            value: number;
+          };
+          setCount(target.value);
+        }}
       />
       <button
         onClick={e => {
           e.preventDefault();
-
-          setCount(count + 1);
+          if (count < 10) setCount(count + 1);
         }}
       >
         +

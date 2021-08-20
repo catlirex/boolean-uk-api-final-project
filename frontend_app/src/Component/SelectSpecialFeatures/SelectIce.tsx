@@ -13,6 +13,8 @@ const IceDivEl = styled.div`
 
   width: 100%;
 
+  gap: 5px;
+
   padding: 0.5rem;
 
   input[type="radio"].ice {
@@ -75,9 +77,9 @@ export default function SelectIce() {
   const iceOptions = specialRequest?.filter(request => request.type === "ice");
 
   return (
-    <IceDivEl onChange={e => handleClick(e)}>
-      {iceOptions?.map(option => (
-        <>
+    <IceDivEl onChange={e => handleClick(e)} className="ice-options">
+      {iceOptions?.map((option, index) => (
+        <div key={index}>
           <input
             id={option.request.toString()}
             type="radio"
@@ -89,7 +91,7 @@ export default function SelectIce() {
           <label htmlFor={option.request.toString()}>
             {option.request} +${option.price}
           </label>
-        </>
+        </div>
       ))}
     </IceDivEl>
   );

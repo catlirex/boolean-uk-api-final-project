@@ -30,12 +30,16 @@ const ShopCardUl = styled.ul`
   overflow-y: scroll;
   overflow-style: none;
   scroll-behavior: smooth;
+
+  .container:hover {
+    box-shadow: 0px 0px 10px 1px ${APP_COLOR.white};
+  }
 `;
 
 export default function ShopCards() {
-  const fetchShops = useStore((store) => store.fetchShops);
-  const shops = useStore((store) => store.shops);
-  const addShopIdToCart = useStore((store) => store.addShopIdToCart);
+  const fetchShops = useStore(store => store.fetchShops);
+  const shops = useStore(store => store.shops);
+  const addShopIdToCart = useStore(store => store.addShopIdToCart);
   const history = useHistory();
 
   function handleClick(shop: ShopType) {
@@ -52,7 +56,7 @@ export default function ShopCards() {
       {shops.map((shop, index) => (
         <ShopCardDiv
           key={index}
-          className="shop"
+          className="shop container"
           onClick={() => handleClick(shop)}
         >
           <div className="shop-image">

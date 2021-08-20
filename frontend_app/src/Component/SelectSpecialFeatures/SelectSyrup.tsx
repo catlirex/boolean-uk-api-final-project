@@ -76,7 +76,6 @@ export default function SelectSyrup() {
     const target = e.target as typeof e.target & {
       value: string;
     };
-    console.log(target.value);
   };
 
   const syrupOptions = specialRequest?.filter(
@@ -84,11 +83,9 @@ export default function SelectSyrup() {
   );
 
   return (
-    <SyrupDivEl
-    //  onChange={e => handleClick(e)}
-    >
-      {syrupOptions?.map(option => (
-        <>
+    <SyrupDivEl onChange={e => handleClick(e)} className="syrup-options">
+      {syrupOptions?.map((option, index) => (
+        <div key={index}>
           <input
             id={option.request.toString()}
             type="checkbox"
@@ -99,7 +96,7 @@ export default function SelectSyrup() {
           <label htmlFor={option.request.toString()}>
             {option.request} +${option.price}
           </label>
-        </>
+        </div>
       ))}
     </SyrupDivEl>
   );

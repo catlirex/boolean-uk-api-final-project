@@ -68,23 +68,21 @@ export default function OrderPreviewPage() {
   const history = useHistory();
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const cart = useStore((state) => state.cart);
+  const cart = useStore(state => state.cart);
 
-  const shopList = useStore((state) => state.shops);
-  const shopDetail = shopList.find((target) => target.id === cart?.shop_id);
+  const shopList = useStore(state => state.shops);
+  const shopDetail = shopList.find(target => target.id === cart?.shop_id);
 
-  const coffeeList = useStore((state) => state.coffeeList);
-  const specialRequest = useStore((state) => state.specialRequest);
-  const completeTransaction = useStore((state) => state.completeTransaction);
+  const coffeeList = useStore(state => state.coffeeList);
+  const specialRequest = useStore(state => state.specialRequest);
+  const completeTransaction = useStore(state => state.completeTransaction);
   useEffect(() => {
-    console.log(cart?.coffee_orders);
-
     if (!cart || !cart?.coffee_orders) return;
     const coffeePricePerOrder = [];
 
     for (const coffee of cart?.coffee_orders) {
       let coffeeDetails = coffeeList.find(
-        (target) => target.id === coffee.coffee_id
+        target => target.id === coffee.coffee_id
       );
 
       if (coffeeDetails) {
@@ -96,7 +94,7 @@ export default function OrderPreviewPage() {
     for (const order of cart?.coffee_orders) {
       for (const request of order.specialRequests) {
         let requestDetails = specialRequest?.find(
-          (target) => target.id === request.specialRequestId
+          target => target.id === request.specialRequestId
         );
 
         if (requestDetails) {
@@ -110,14 +108,14 @@ export default function OrderPreviewPage() {
       setTotalPrice(coffeePricePerOrder.reduce((a, b) => a + b));
   }, [cart]);
 
-  const loginUser = useStore((state) => state.loginUser);
+  const loginUser = useStore(state => state.loginUser);
 
   useEffect(() => {
     if (!loginUser) history.push("/");
   }, [loginUser]);
 
   const transactionDone = async () => {
-    completeTransaction().then((newTransaction) =>
+    completeTransaction().then(newTransaction =>
       history.push(`/user/transactionRecord/${newTransaction.id}`)
     );
   };
@@ -142,7 +140,7 @@ export default function OrderPreviewPage() {
             ))}
           </ul>
 
-          <WheatButton onClick={(e) => transactionDone()}> Pay</WheatButton>
+          <WheatButton onClick={e => transactionDone()}> Pay</WheatButton>
           <WheatButton onClick={() => history.push("/user/coffeeList")}>
             {" "}
             Add another Coffee

@@ -11,6 +11,8 @@ const MilkDivEl = styled.div`
 
   padding: 0.5rem;
 
+  gap: 5px;
+
   overflow-x: scroll;
 
   input[type="radio"].milk {
@@ -76,11 +78,11 @@ export default function SelectMilk() {
 
   return (
     <MilkDivEl
-      className="horizontal-scroll-wrapper squares"
+      className="horizontal-scroll-wrapper milk-options squares"
       onChange={e => handleClick(e)}
     >
-      {milkOptions?.map(option => (
-        <>
+      {milkOptions?.map((option, index) => (
+        <div key={index}>
           <input
             id={option.request.toString()}
             type="radio"
@@ -89,7 +91,7 @@ export default function SelectMilk() {
             value={option.id.toString()}
           />
           <label htmlFor={option.request.toString()}>{option.request}</label>
-        </>
+        </div>
       ))}
     </MilkDivEl>
   );

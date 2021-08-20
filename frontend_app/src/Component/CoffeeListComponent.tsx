@@ -52,6 +52,10 @@ const CoffeeLIstUl = styled.ul`
 
   margin-right: auto;
   margin-left: auto;
+
+  .container:hover {
+    box-shadow: 0px 0px 5px 0.5px ${APP_COLOR.white};
+  }
 `;
 
 export default function CoffeeListComponent() {
@@ -84,6 +88,7 @@ export default function CoffeeListComponent() {
           onClick={() => {
             handleSubmit(coffee);
           }}
+          className="container"
         >
           <div className="coffee-image">
             <img
