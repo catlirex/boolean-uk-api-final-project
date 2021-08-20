@@ -3,7 +3,26 @@ import styled from "styled-components";
 import appLogo from "../assets/app_logo.png";
 import useStore from "../store";
 import { APP_COLOR } from "../consistent";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
+
+const ColoredButton = withStyles(() => ({
+  root: {
+    height: "40px",
+    borderBottomLeftRadius: "10px",
+    borderBottomRightRadius: "10px",
+    borderTopLeftRadius: "10px",
+    borderTopRightRadius: "10px",
+    margin: "0",
+    borderRadius: 0,
+    color: APP_COLOR.darkGray,
+    backgroundColor: APP_COLOR.white,
+    "&:hover": {
+      backgroundColor: APP_COLOR.paleWheat,
+    },
+  },
+}))(Button);
 
 const StyledHeader = styled.header`
   display: grid;
@@ -36,11 +55,18 @@ const StyledHeader = styled.header`
     color: ${APP_COLOR.wheat};
     font-style: italic;
   }
+  .button-container {
+    width: 200px;
+    text-align: right;
+  }
+  em {
+    color: ${APP_COLOR.darkGray};
+  }
 `;
 
 export default function Header() {
+  const history = useHistory();
   const location = useLocation();
-  console.log(location.pathname.split("/"));
   const loginUser = useStore((state) => state.loginUser);
   return (
     <StyledHeader>
@@ -59,6 +85,13 @@ export default function Header() {
           <h1> Order details </h1>
           <span> (ID: {location.pathname.split("/")[3]}) </span>
         </>
+      ) : null}
+      {location.pathname.includes("/shop/order/") ? (
+        <div className="button-container">
+          <ColoredButton onClick={() => history.push("/shop")}>
+            <em>Back</em>
+          </ColoredButton>
+        </div>
       ) : null}
     </StyledHeader>
   );

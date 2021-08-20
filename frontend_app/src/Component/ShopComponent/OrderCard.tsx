@@ -12,7 +12,7 @@ type Props = {
 };
 
 const HistoryLi = styled.li`
-  background-color: ${APP_COLOR.wheat};
+  background-color: ${(props) => props.color};
   padding: 0 10px;
   border-radius: 5px;
   display: grid;
@@ -63,7 +63,9 @@ export default function OrderCard({ order }: Props) {
 
   const handleClick = (e: React.SyntheticEvent) => {
     e.stopPropagation();
-    updateStatus(id, "processing");
+    updateStatus(id, "processing").then(() =>
+      history.push(`/shop/order/${id}`)
+    );
   };
 
   return (
@@ -71,6 +73,12 @@ export default function OrderCard({ order }: Props) {
       onClick={() => {
         history.push(`/shop/order/${id}`);
       }}
+      color={
+        new Date(estimated_pickup_time).getTime() < Date.now() &&
+        (status === "pending" || status === "processing")
+          ? APP_COLOR.paleRed
+          : APP_COLOR.wheat
+      }
     >
       <div className="status-box">
         <span className="status">{status}</span>

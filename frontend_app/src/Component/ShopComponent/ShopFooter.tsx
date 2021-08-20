@@ -47,6 +47,7 @@ export default function ShopFooter() {
   const setOrderFilter = useStore((state) => state.setOrderFilter);
   const history = useHistory();
   const classes = useStyles();
+
   return (
     <StyledShopFooter>
       <div className={classes.root}>

@@ -7,4 +7,5 @@ export const APP_COLOR = {
   wheat: "#d8c690",
   paleWheat: "#e5d9b6",
   white: "#ffffff",
+  paleRed: "#FF8080",
 };

@@ -111,7 +111,7 @@ type StoreType = {
   fetchSpecialRequests: () => void;
 
   setLoginShop: (e: React.SyntheticEvent) => void;
-  updateStatus: (id: number, status: string) => void;
+  updateStatus: (id: number, status: string) => Promise<undefined>;
   orderFilter: string;
   setOrderFilter: (filter: string) => void;
 };
@@ -266,6 +266,7 @@ const useStore = create<StoreType>((set, get) => ({
       else return target;
     });
     if (updatedArray) set({ loginShopTodayTransaction: updatedArray });
+    return undefined;
   },
   orderFilter: "pending",
   setOrderFilter: filter => {
