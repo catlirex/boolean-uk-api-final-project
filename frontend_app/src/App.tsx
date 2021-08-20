@@ -10,6 +10,7 @@ import TransactionListPage from "./Pages/TransactionListPage";
 import TransactionDetailPage from "./Pages/TransactionDetailPage";
 import ShopHomePage from "./Pages/ShopHomePage";
 import ShopOrderDetailPage from "./Pages/ShopOrderDetailPage";
+import OrderPreviewPage from "./Pages/OrderPreview";
 
 function App() {
   return (
@@ -30,6 +31,10 @@ function App() {
 
           <Route path="/user/coffeeDetails" exact>
             <CoffeeDetailsPage />
+          </Route>
+
+          <Route path="/user/orderPreview" exact>
+            <OrderPreviewPage />
           </Route>
 
           <Route path="/user/transactionRecord" exact>

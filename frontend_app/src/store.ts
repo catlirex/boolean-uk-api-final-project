@@ -20,17 +20,7 @@ type CartType = {
   estimateTime?: number;
   userId?: number;
   shop_id?: number;
-  coffee?: CoffeeTypeInCart[];
-};
-
-type CoffeeTypeInCart = {
-  quantity: number;
-  coffeeId: number;
-  specialRequest: SpecialRequestTypeInCart[];
-};
-
-type SpecialRequestTypeInCart = {
-  specialRequestId: number;
+  coffee_orders?: CoffeeOrderType[];
 };
 
 export type CoffeeType = {
@@ -50,20 +40,20 @@ type specialRequestType = {
   type: string;
 };
 
-type specialRequestsType = {
-  id: number;
+export type specialRequestsType = {
+  id?: number;
   specialRequestId: number;
-  coffeeOrderId: number;
-  specialRequest: specialRequestType;
+  coffeeOrderId?: number;
+  specialRequest?: specialRequestType;
 };
 
 export type CoffeeOrderType = {
-  id: number;
+  id?: number;
   quantity: number;
-  transaction_id: number;
+  transaction_id?: number;
   coffee_id: number;
-  coffee: CoffeeType;
-  specialRequests?: specialRequestsType[];
+  coffee?: CoffeeType;
+  specialRequests: specialRequestsType[];
 };
 
 export type TransactionHistory = {
@@ -77,9 +67,9 @@ export type TransactionHistory = {
 };
 
 type SpecialRequest = {
-  id: Number;
+  id: number;
   request: string;
-  price: Number;
+  price: number;
   type: string;
 };
 
