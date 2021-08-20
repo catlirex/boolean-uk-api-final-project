@@ -1,7 +1,7 @@
 const { coffeeOrder } = require("../../utils/database");
 
 async function getOneOrder(req, res) {
-  const id = Number(req.params.transactionId);
+  const id = parseInt(req.params.transactionId);
   try {
     const result = await coffeeOrder.findUnique({
       where: { id },

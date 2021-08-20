@@ -11,6 +11,7 @@ import SelectSyrup from "./SelectSpecialFeatures/SelectSyrup";
 import SelectIce from "./SelectSpecialFeatures/SelectIce";
 import QuantityComponent from "./QuantityComponent";
 import CoffeeDetailsFooter from "./CoffeeDetailFooter";
+import { useHistory } from "react-router-dom";
 
 const DetailComponentUl = styled.ul`
   display: grid;
@@ -42,6 +43,8 @@ export default function CoffeeDetailsComponent() {
   const fetchSpecialRequests = useStore(store => store.fetchSpecialRequests);
   const setCart = useStore(store => store.setCart);
   const completeTransaction = useStore(store => store.completeTransaction);
+
+  const history = useHistory();
 
   useEffect(() => {
     fetchSpecialRequests();
@@ -131,6 +134,8 @@ export default function CoffeeDetailsComponent() {
       completeTransaction();
       console.log(transactions);
     }
+    console.log(cart);
+    history.push("/user/orderPreview");
   };
 
   if (!selectedCoffee) return <h1>Loading...</h1>;
