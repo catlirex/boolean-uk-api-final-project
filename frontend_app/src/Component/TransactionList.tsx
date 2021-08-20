@@ -27,6 +27,15 @@ export default function TransactionList() {
   const getUserTransactionHistory = useStore(
     (state) => state.getUserTransactionHistory
   );
+
+  let collectedHistory = userTransactionHistory.filter(
+    (target) => target.status === "collected"
+  );
+  let notCollectedHistory = userTransactionHistory.filter(
+    (target) => target.status !== "collected"
+  );
+  let sortedHistory = [...notCollectedHistory, ...collectedHistory];
+
   useEffect(() => {
     fetchShops();
     if (!loginUser) history.push("/");
@@ -35,8 +44,8 @@ export default function TransactionList() {
 
   return (
     <StyledHistoryList>
-      {userTransactionHistory.length ? (
-        userTransactionHistory.map((history: TransactionHistory, index) => (
+      {sortedHistory.length ? (
+        sortedHistory.map((history: TransactionHistory, index) => (
           <TransactionHistoryCard history={history} key={index} />
         ))
       ) : (
