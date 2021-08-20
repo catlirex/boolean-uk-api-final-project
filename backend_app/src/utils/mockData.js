@@ -509,8 +509,8 @@ const specialRequestList = [
 
 const shopList = [
   {
-    name: "Manchester",
-    postcode: "M1 1AA",
+    name: "London",
+    postcode: "E1 1AA",
     image:
       "https://th.bing.com/th/id/R.c7ea712ed99b0137f9852db177fa33ab?rik=0guWgEBv2%2f4dYQ&riu=http%3a%2f%2f2.bp.blogspot.com%2f-ZbWw9bUA7w8%2fUUEQkGVOXDI%2fAAAAAAAABw4%2fnLIbv3hnk3g%2fs1600%2fcoffee-shop-1.jpg&ehk=K1OWp%2fRQCiMh%2bt2DV%2fQsj9jbEx38vac%2bghClFxPhHMk%3d&risl=&pid=ImgRaw&r=0",
   },

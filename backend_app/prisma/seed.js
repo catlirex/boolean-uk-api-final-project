@@ -45,52 +45,52 @@ async function seed() {
     createdShopList.push(createdShop);
   }
 
-  const usersList = buildUserList();
-  const createdUsersList = [];
+  // const usersList = buildUserList();
+  // const createdUsersList = [];
 
-  for (const userData of usersList) {
-    const createdUser = await prisma.user.create({
-      data: userData,
-    });
+  // for (const userData of usersList) {
+  //   const createdUser = await prisma.user.create({
+  //     data: userData,
+  //   });
 
-    console.log(createdUser);
-    createdUsersList.push(createdUser);
-  }
+  //   console.log(createdUser);
+  //   createdUsersList.push(createdUser);
+  // }
 
-  for (const user of createdUsersList) {
-    let transactionList = buildTransactionsList();
-    for (const oneTransaction of transactionList) {
-      oneTransaction.user_id = user.id;
-      oneTransaction.shop_id = getRandomInt(1, 3);
-      const createdTransaction = await prisma.transaction.create({
-        data: oneTransaction,
-      });
-      console.log(createdTransaction);
-      const numOfOrder = getRandomInt(1, 3);
-      for (let i = 0; i < numOfOrder; i++) {
-        let orderData = {
-          quantity: getRandomInt(1, 3),
-          transaction_id: createdTransaction.id,
-          coffee_id: getRandomInt(1, 40),
-          specialRequests: {
-            create: [
-              {
-                specialRequest: {
-                  connect: {
-                    id: getRandomInt(1, 10),
-                  },
-                },
-              },
-            ],
-          },
-        };
-        const createdOrder = await prisma.coffeeOrder.create({
-          data: orderData,
-        });
-        console.log(createdOrder);
-      }
-    }
-  }
+  // for (const user of createdUsersList) {
+  //   let transactionList = buildTransactionsList();
+  //   for (const oneTransaction of transactionList) {
+  //     oneTransaction.user_id = user.id;
+  //     oneTransaction.shop_id = getRandomInt(1, 3);
+  //     const createdTransaction = await prisma.transaction.create({
+  //       data: oneTransaction,
+  //     });
+  //     console.log(createdTransaction);
+  //     const numOfOrder = getRandomInt(1, 3);
+  //     for (let i = 0; i < numOfOrder; i++) {
+  //       let orderData = {
+  //         quantity: getRandomInt(1, 3),
+  //         transaction_id: createdTransaction.id,
+  //         coffee_id: getRandomInt(1, 40),
+  //         specialRequests: {
+  //           create: [
+  //             {
+  //               specialRequest: {
+  //                 connect: {
+  //                   id: getRandomInt(1, 10),
+  //                 },
+  //               },
+  //             },
+  //           ],
+  //         },
+  //       };
+  //       const createdOrder = await prisma.coffeeOrder.create({
+  //         data: orderData,
+  //       });
+  //       console.log(createdOrder);
+  //     }
+  //   }
+  // }
 }
 
 seed()

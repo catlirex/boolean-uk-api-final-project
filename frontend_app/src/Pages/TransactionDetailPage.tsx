@@ -76,7 +76,6 @@ export default function TransactionDetailPage() {
       .then((data) => setFullDetailHistory(data));
   }, [id]);
 
-  console.log(fullDetailHistory);
   const shopList = useStore((state) => state.shops);
   const shopDetail = shopList.find(
     (target) => target.id === fullDetailHistory?.shop_id

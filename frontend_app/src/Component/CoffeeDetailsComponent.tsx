@@ -36,13 +36,13 @@ const DetailComponentUl = styled.ul`
 `;
 
 export default function CoffeeDetailsComponent() {
-  const selectedCoffee = useStore(store => store.selectedCoffee);
-  const loginUser = useStore(store => store.loginUser);
-  const cart = useStore(store => store.cart);
-  const shops = useStore(store => store.shops);
-  const fetchSpecialRequests = useStore(store => store.fetchSpecialRequests);
-  const setCart = useStore(store => store.setCart);
-  const completeTransaction = useStore(store => store.completeTransaction);
+  const selectedCoffee = useStore((store) => store.selectedCoffee);
+  const loginUser = useStore((store) => store.loginUser);
+  const cart = useStore((store) => store.cart);
+  const shops = useStore((store) => store.shops);
+  const fetchSpecialRequests = useStore((store) => store.fetchSpecialRequests);
+  const setCart = useStore((store) => store.setCart);
+  const completeTransaction = useStore((store) => store.completeTransaction);
 
   const history = useHistory();
 
@@ -63,8 +63,8 @@ export default function CoffeeDetailsComponent() {
     };
 
     const syrups = [...target.syrup]
-      .filter(input => input.checked)
-      .map(input => input.value);
+      .filter((input) => input.checked)
+      .map((input) => input.value);
 
     if (cart?.coffee_orders) {
       const newCoffee = {
@@ -121,10 +121,10 @@ export default function CoffeeDetailsComponent() {
         });
 
       let waitingMinutes = shops.find(
-        target => target.id === cart?.shop_id
+        (target) => target.id === cart?.shop_id
       )?.estimateTime;
 
-      if (waitingMinutes) {
+      if (waitingMinutes !== undefined) {
         let estimateTime = new Date(
           Date.now() + waitingMinutes * 60000
         ).toISOString();
@@ -150,7 +150,7 @@ export default function CoffeeDetailsComponent() {
       />
       <h1 className="details">{coffeeToDisplay.name}</h1>
       <p className="details">{coffeeToDisplay.description}.</p>
-      <form className="form" onSubmit={e => handleSubmit(e)}>
+      <form className="form" onSubmit={(e) => handleSubmit(e)}>
         <h2 className="details">Cuztomize your drink!</h2>
 
         <h3 className="details">Quantity:</h3>
