@@ -21,6 +21,7 @@ type CartType = {
   userId?: number;
   shop_id?: number;
   coffee_orders?: CoffeeOrderType[];
+  estimated_pickup_time?: string;
 };
 
 export type CoffeeType = {
@@ -66,7 +67,7 @@ export type TransactionHistory = {
   coffeeOrder?: CoffeeOrderType[];
 };
 
-type SpecialRequest = {
+export type SpecialRequest = {
   id: number;
   request: string;
   price: number;
@@ -88,7 +89,7 @@ type StoreType = {
   cart: CartType | null;
 
   setCart: (arg1: CartType) => void;
-  completeTransaction: () => void;
+  completeTransaction: () => Promise<TransactionHistory>;
 
   coffeeList: CoffeeType[] | [];
   fetchCoffeeList: () => void;
@@ -108,19 +109,19 @@ type StoreType = {
 
 const useStore = create<StoreType>((set, get) => ({
   loginRole: null,
-  selectRole: role => {
+  selectRole: (role) => {
     if (get().loginRole === role) set({ loginRole: null });
     else set({ loginRole: role });
   },
   loginError: null,
   loginUser: null,
-  setLogInUser: async e => {
+  setLogInUser: async (e) => {
     const target = e.target as typeof e.target & {
       phone: { value: string };
     };
     const data = await fetch(
       `http://localhost:3000/users/${target.phone.value}`
-    ).then(res => res.json());
+    ).then((res) => res.json());
 
     if (data.id) set({ loginUser: data });
     else set({ loginError: undefined });
@@ -137,7 +138,7 @@ const useStore = create<StoreType>((set, get) => ({
         "Content-Type": "application/json",
       },
       body: JSON.stringify(submitNewUser),
-    }).then(res => res.json());
+    }).then((res) => res.json());
 
     if (!createdUser.id) set({ loginError: "failToCreate" });
     else set({ loginUser: createdUser });
@@ -148,19 +149,19 @@ const useStore = create<StoreType>((set, get) => ({
     const userID = get().loginUser?.id;
     const allTransaction = await fetch(
       `http://localhost:3000/transactions/user/${userID}`
-    ).then(res => res.json());
+    ).then((res) => res.json());
     set({ userTransactionHistory: allTransaction });
   },
-  deleteTransaction: async id => {
+  deleteTransaction: async (id) => {
     const deletedData = await fetch(
       `http://localhost:3000/transactions/${id}`,
       {
         method: "DELETE",
       }
-    ).then(res => res.json());
+    ).then((res) => res.json());
     set({
       userTransactionHistory: get().userTransactionHistory.filter(
-        target => target.id === deletedData.id
+        (target) => target.id === deletedData.id
       ),
     });
   },
@@ -168,11 +169,11 @@ const useStore = create<StoreType>((set, get) => ({
   shops: [],
   fetchShops: () => {
     fetch("http://localhost:3000/shops/")
-      .then(res => res.json())
-      .then(shopsList => {
+      .then((res) => res.json())
+      .then((shopsList) => {
         fetch("http://localhost:3000/shops/estimateTime")
-          .then(res => res.json())
-          .then(shopsEstimateTime => {
+          .then((res) => res.json())
+          .then((shopsEstimateTime) => {
             const completeShopList = shopsList.map((shop: ShopType) => {
               for (const shopTime of shopsEstimateTime) {
                 if (shopTime.postcode === shop.postcode)
@@ -188,34 +189,34 @@ const useStore = create<StoreType>((set, get) => ({
   addShopIdToCart: (id: number) => {
     set({ cart: { shop_id: id } });
   },
-  setCart: newCart => {
+  setCart: (newCart) => {
     set({ cart: newCart });
   },
 
   completeTransaction: () => {
-    fetch("http://localhost:3000/transactions/", {
+    return fetch("http://localhost:3000/transactions/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(get().cart),
-    }).then(res => res.json());
+    }).then((res) => res.json());
   },
 
   coffeeList: [],
   fetchCoffeeList: () => {
     fetch("http://localhost:3000/coffee")
-      .then(res => res.json())
-      .then(coffee => set({ coffeeList: coffee }));
+      .then((res) => res.json())
+      .then((coffee) => set({ coffeeList: coffee }));
   },
 
   selectedCoffee: null,
 
-  setSelectedCoffee: coffeeName => {
+  setSelectedCoffee: (coffeeName) => {
     const fetchSelectedCoffee = () => {
       fetch(`http://localhost:3000/coffee/${coffeeName}`)
-        .then(res => res.json())
-        .then(coffee => set({ selectedCoffee: coffee }));
+        .then((res) => res.json())
+        .then((coffee) => set({ selectedCoffee: coffee }));
     };
     fetchSelectedCoffee();
   },
@@ -223,8 +224,8 @@ const useStore = create<StoreType>((set, get) => ({
   specialRequest: [],
   fetchSpecialRequests: () => {
     fetch("http://localhost:3000/specialRequests")
-      .then(res => res.json())
-      .then(request => set({ specialRequest: request }));
+      .then((res) => res.json())
+      .then((request) => set({ specialRequest: request }));
   },
 
   loginShopTodayTransaction: null,
@@ -234,7 +235,7 @@ const useStore = create<StoreType>((set, get) => ({
     };
     const data = await fetch(
       `http://localhost:3000/transactions/shop/${target.postcode.value}/today`
-    ).then(res => res.json());
+    ).then((res) => res.json());
 
     if (data.length) set({ loginShopTodayTransaction: data });
     else set({ loginError: undefined });
@@ -249,8 +250,8 @@ const useStore = create<StoreType>((set, get) => ({
         },
         body: JSON.stringify({ status }),
       }
-    ).then(res => res.json());
-    let updatedArray = get().loginShopTodayTransaction?.map(target => {
+    ).then((res) => res.json());
+    let updatedArray = get().loginShopTodayTransaction?.map((target) => {
       if (target.id === updatedTransaction.id)
         return { ...target, ...updatedTransaction };
       else return target;
@@ -259,7 +260,7 @@ const useStore = create<StoreType>((set, get) => ({
     return undefined;
   },
   orderFilter: "pending",
-  setOrderFilter: filter => {
+  setOrderFilter: (filter) => {
     set({ orderFilter: filter });
   },
 }));

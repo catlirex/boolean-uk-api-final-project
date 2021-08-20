@@ -11,9 +11,10 @@ const getAll = async (req, res) => {
 
 const getCoffeeByName = async (req, res) => {
   const name = req.params.name;
+  console.log(name);
   try {
     const result = await coffee.findMany({
-      where: { name },
+      where: { name: { equals: name, mode: "insensitive" } },
     });
     if (result) res.json(result);
     if (!result) res.json({ msg: "Item not found" });

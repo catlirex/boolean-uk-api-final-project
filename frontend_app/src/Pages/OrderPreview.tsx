@@ -9,6 +9,7 @@ import CoffeeOrderCard from "../Component/CoffeeOrderCard";
 import { APP_COLOR } from "../consistent";
 import { Button, withStyles } from "@material-ui/core";
 import CoffeeOrderPreviewCard from "../Component/CoffeeOrderPreviewCard";
+import Footer from "../Component/Footer";
 
 type Params = {
   id: string;
@@ -20,7 +21,7 @@ const WheatButton = withStyles(() => ({
     marginRight: "5px",
     height: "50px",
     fontSize: "0.8rem",
-    width: "80px",
+    width: "auto",
     color: APP_COLOR.darkGray,
     backgroundColor: APP_COLOR.paleWheat,
     "&:hover": {
@@ -67,14 +68,14 @@ export default function OrderPreviewPage() {
   const history = useHistory();
   const [totalPrice, setTotalPrice] = useState(0);
 
-  const cart = useStore(state => state.cart);
+  const cart = useStore((state) => state.cart);
 
-  const shopList = useStore(state => state.shops);
-  const shopDetail = shopList.find(target => target.id === cart?.shop_id);
+  const shopList = useStore((state) => state.shops);
+  const shopDetail = shopList.find((target) => target.id === cart?.shop_id);
 
-  const coffeeList = useStore(state => state.coffeeList);
-  const specialRequest = useStore(state => state.specialRequest);
-
+  const coffeeList = useStore((state) => state.coffeeList);
+  const specialRequest = useStore((state) => state.specialRequest);
+  const completeTransaction = useStore((state) => state.completeTransaction);
   useEffect(() => {
     console.log(cart?.coffee_orders);
 
@@ -83,7 +84,7 @@ export default function OrderPreviewPage() {
 
     for (const coffee of cart?.coffee_orders) {
       let coffeeDetails = coffeeList.find(
-        target => target.id === coffee.coffee_id
+        (target) => target.id === coffee.coffee_id
       );
 
       if (coffeeDetails) {
@@ -95,7 +96,7 @@ export default function OrderPreviewPage() {
     for (const order of cart?.coffee_orders) {
       for (const request of order.specialRequests) {
         let requestDetails = specialRequest?.find(
-          target => target.id === request.specialRequestId
+          (target) => target.id === request.specialRequestId
         );
 
         if (requestDetails) {
@@ -109,63 +110,49 @@ export default function OrderPreviewPage() {
       setTotalPrice(coffeePricePerOrder.reduce((a, b) => a + b));
   }, [cart]);
 
-  const loginUser = useStore(state => state.loginUser);
+  const loginUser = useStore((state) => state.loginUser);
 
   useEffect(() => {
     if (!loginUser) history.push("/");
   }, [loginUser]);
 
-  //   const handleClick = async (e: React.SyntheticEvent) => {
-  //     if (cart) {
-  //       const complete = await deleteTransaction(cart.id);
-  //       history.push("/user/transactionRecord");
-  //     }
-  //   };
+  const transactionDone = async () => {
+    completeTransaction().then((newTransaction) =>
+      history.push(`/user/transactionRecord/${newTransaction.id}`)
+    );
+  };
 
   return (
     <StyledPage>
       <Header />
       {cart && totalPrice ? (
         <StyledSection>
-          {/* <div className="status-box">
-            <span className="status">{cart.status}</span>
-            {cart.status === "pending" || cart.status === "processing" ? (
-              <span>ReadyOn: {cart.estimated_pickup_time.slice(11, 16)}</span>
-            ) : null}
-          </div> */}
-          <div></div>
           <div className="info-box">
             <span>Shop:</span>
             <span> {shopDetail?.name}</span>
             <span>Total Price: </span>
             <span>${totalPrice}</span>
-            <span>Date: </span>
+            <span>Ready on:</span>
 
-            <span>
-              The date
-              {/* {" "}
-              {cart.transaction_time.slice(0, 10)}{" "}
-              {cart.transaction_time.slice(11, 16)} */}
-            </span>
+            <span>{cart.estimated_pickup_time?.slice(11, 16)}</span>
           </div>
           <ul>
             {cart?.coffee_orders?.map((order, index) => (
               <CoffeeOrderPreviewCard order={order} key={index} />
             ))}
           </ul>
-          {/* {cart.status === "pending" ? (
-            <WheatButton
-              variant="contained"
-              type="button"
-              onClick={e => handleClick(e)}
-            >
-              Cancel order
-            </WheatButton>
-          ) : null} */}
+
+          <WheatButton onClick={(e) => transactionDone()}> Pay</WheatButton>
+          <WheatButton onClick={() => history.push("/user/coffeeList")}>
+            {" "}
+            Add another Coffee
+          </WheatButton>
         </StyledSection>
       ) : (
         <h1>Loading</h1>
       )}
+
+      <Footer />
     </StyledPage>
   );
 }

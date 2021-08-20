@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
-import useStore, { TransactionHistory, CoffeeOrderType } from "../store";
+import React, { useEffect, useState } from "react";
+import { APP_COLOR } from "../consistent";
+import useStore, { CoffeeOrderType, SpecialRequest } from "../store";
 import styled from "styled-components";
 
 type Props = {
@@ -10,6 +11,7 @@ const StyledOrderCard = styled.li`
   display: grid;
   grid-template-columns: 1fr 80px;
   padding: 5px;
+  margin-bottom: 10px;
   .coffee-info-box {
     align-self: center;
   }
@@ -24,16 +26,51 @@ const StyledOrderCard = styled.li`
   p {
     font-size: 0.9rem;
   }
+  button {
+    float: right;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: ${APP_COLOR.paleWheat};
+    border: none;
+  }
 `;
 
 export default function CoffeeOrderPreviewCard({ order }: Props) {
   const { quantity, specialRequests, coffee_id } = order;
+  const cart = useStore((state) => state.cart);
+  const setCart = useStore((state) => state.setCart);
+  console.log("coffee_id", coffee_id);
 
-  const coffeeList = useStore(store => store.coffeeList);
+  const coffeeList = useStore((store) => store.coffeeList);
+  const coffee = coffeeList.find((coffee) => coffee.id === coffee_id);
+  console.log("coffee", coffee);
 
-  const coffee = coffeeList.find(coffee => coffee.id === coffee_id);
+  const specialRequestList = useStore((state) => state.specialRequest);
+  const [selectedRequestDetail, setSelectedRequestDetail] = useState<
+    SpecialRequest[]
+  >([]);
 
-  //   const coffeeName = coffeeList.find(target => target.name === coffee?.name )
+  useEffect(() => {
+    let data = [];
+    for (const request of specialRequests) {
+      let detail = specialRequestList?.find(
+        (target) => target.id === request.specialRequestId
+      );
+      if (detail) data.push(detail);
+    }
+    setSelectedRequestDetail(data);
+  }, [specialRequests]);
+
+  const removeCoffee = () => {
+    const newCart = {
+      ...cart,
+      coffee_orders: cart?.coffee_orders?.filter(
+        (target) => target.coffee_id !== coffee_id
+      ),
+    };
+    setCart(newCart);
+  };
 
   return (
     <StyledOrderCard>
@@ -44,15 +81,18 @@ export default function CoffeeOrderPreviewCard({ order }: Props) {
         </h2>
         <p>{coffee?.size}</p>
 
-        {/* {specialRequests?.length
-          ? specialRequests.map(request => (
+        {selectedRequestDetail.length
+          ? selectedRequestDetail.map((request) => (
               <p key={request.id}>
-                {request.specialRequest.request} {request.specialRequest.type}
+                {request.request} {request.type}
               </p>
             ))
-          : null} */}
+          : null}
       </div>
-      <img className="coffee-image" src={coffee?.image} alt={coffee?.name} />
+      <div>
+        <button onClick={() => removeCoffee()}> X </button>
+        <img className="coffee-image" src={coffee?.image} alt={coffee?.name} />
+      </div>
     </StyledOrderCard>
   );
 }
