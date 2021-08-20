@@ -9,7 +9,7 @@ const SizeDivEl = styled.div`
 
   align-items: center;
 
-  place-items: baseline;
+  place-items: center;
 
   padding: 0.5rem;
 
@@ -72,21 +72,21 @@ export default function () {
   };
 
   return (
-    <SizeDivEl onChange={e => handleClick(e)}>
-      {selectedCoffee.map(coffee => (
-        <>
+    <SizeDivEl onChange={e => handleClick(e)} className="size-options">
+      {selectedCoffee.map((coffee, index) => (
+        <div key={index}>
           <input
             id={coffee.size.toString()}
             required
             type="radio"
             name="size"
             className="size"
-            value={coffee.id.toString()}
+            defaultValue={coffee.id.toString()}
           />
           <label htmlFor={coffee.size.toString()}>
             {coffee.size} ${coffee.price}
           </label>
-        </>
+        </div>
       ))}
     </SizeDivEl>
   );

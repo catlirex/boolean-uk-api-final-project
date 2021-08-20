@@ -38,15 +38,13 @@ const StyledOrderCard = styled.li`
 
 export default function CoffeeOrderPreviewCard({ order }: Props) {
   const { quantity, specialRequests, coffee_id } = order;
-  const cart = useStore((state) => state.cart);
-  const setCart = useStore((state) => state.setCart);
-  console.log("coffee_id", coffee_id);
+  const cart = useStore(state => state.cart);
+  const setCart = useStore(state => state.setCart);
 
-  const coffeeList = useStore((store) => store.coffeeList);
-  const coffee = coffeeList.find((coffee) => coffee.id === coffee_id);
-  console.log("coffee", coffee);
+  const coffeeList = useStore(store => store.coffeeList);
+  const coffee = coffeeList.find(coffee => coffee.id === coffee_id);
 
-  const specialRequestList = useStore((state) => state.specialRequest);
+  const specialRequestList = useStore(state => state.specialRequest);
   const [selectedRequestDetail, setSelectedRequestDetail] = useState<
     SpecialRequest[]
   >([]);
@@ -55,7 +53,7 @@ export default function CoffeeOrderPreviewCard({ order }: Props) {
     let data = [];
     for (const request of specialRequests) {
       let detail = specialRequestList?.find(
-        (target) => target.id === request.specialRequestId
+        target => target.id === request.specialRequestId
       );
       if (detail) data.push(detail);
     }
@@ -66,7 +64,7 @@ export default function CoffeeOrderPreviewCard({ order }: Props) {
     const newCart = {
       ...cart,
       coffee_orders: cart?.coffee_orders?.filter(
-        (target) => target.coffee_id !== coffee_id
+        target => target.coffee_id !== coffee_id
       ),
     };
     setCart(newCart);
@@ -82,7 +80,7 @@ export default function CoffeeOrderPreviewCard({ order }: Props) {
         <p>{coffee?.size}</p>
 
         {selectedRequestDetail.length
-          ? selectedRequestDetail.map((request) => (
+          ? selectedRequestDetail.map(request => (
               <p key={request.id}>
                 {request.request} {request.type}
               </p>
