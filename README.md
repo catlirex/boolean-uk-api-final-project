@@ -1,5 +1,4 @@
-# boolean-uk-api-final-project
-## Coffee Click and Collect SaaS App
+# Coffee Click and Collect SaaS App
 
 #### SignIn/ SignUp page:
 ![image](https://user-images.githubusercontent.com/81304846/131757185-a03d73b8-da32-4689-b768-9923e790ee76.png)
